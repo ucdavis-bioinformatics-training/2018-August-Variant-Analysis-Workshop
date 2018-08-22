@@ -1,5 +1,6 @@
 theme: jekyll-theme-cayman
-title: 'UC Davis Bioinformatics Core 2017 Variant Analysis Workshop'
-tagline: 'August 21-25, 2017'
-name: 'UC Davis Bioinformatics Core 2017 Variant Analysis Workshop'
-future: true
+title: 'UC Davis Bioinformatics Core 2018 Variant Analysis Workshop'
+tagline: 'August 27th-31st, 2018'
+name: 'UC Davis Bioinformatics Core 2018 Variant Analysis Workshop'
+github:
+  repository_url: https://ucdavis-bioinformatics-training.github.io/2018-August-Variant-Analysis-Workshop

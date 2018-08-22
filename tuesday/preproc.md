@@ -61,7 +61,7 @@ Can be downloaded from [here](https://github.com/ibest/HTStream). Fast C++ imple
 
 **1a\.** So let's first take a small subsample of reads, just so our trial run through the pipeline goes really quickly.
 
-    cd ~/rnaseq_example
+    cd ~/variant_example
     mkdir HTS_testing
     cd HTS_testing
     zcat ../00-RawData/C61/C61_S67_L006_R1_001.fastq.gz | head -400000 | gzip > C61.subset_R1.fastq.gz

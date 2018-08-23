@@ -56,7 +56,7 @@ You should see 5 sets of files, one for each sample. Each set should contain two
     
 Note that the Usage shows that we need to give bwa a location for the 'idxbase', which is the path to the reference. Now, we will align the two paired-end files and redirect the alignment output (in SAM format) to a file. We will use 4 threads (processors) and add read group (i.e sample ID) information to the alignment:
 
-    bwa mem -t 6 -R "@RG\tID:A8100\tSM:A8100" ../ref/chr18.fa A8100_R1.fastq.gz A8100_R2.fastq.gz > A8100.chr18.paired.sam
+    bwa mem -t 6 -R "@RG\tID:A8100\tSM:A8100" ../ref/chr18.fa A8100_R1.fastq.gz A8100_R2.fastq.gz > A8100.chr18.all.sam
 
 This step will take about 5 minutes to run.
 
@@ -68,42 +68,34 @@ This step will take about 5 minutes to run.
     samtools
     samtools view
 
-We will use 'samtools view' to convert the sam files into a bam files (binary sam)... using 4 threads and the '-b' flag to output bam format:
+We will use 'samtools view' to convert the sam files into a bam files (binary sam)... using 6 threads and the '-b' flag to output bam format:
 
-    samtools view -@ 4 -b A8100.chr18.paired.sam > A8100.chr18.paired.bam
+    samtools view -@ 6 -b A8100.chr18.sam > A8100.chr18.bam
+
+Sort the alignment for indexing:
+
+    samtools sort -@ 6 -o A8100.chr18.sorted.bam A8100.chr18.bam
 
 -----
 
-**5\.** Now we sort the files by alignment position so that they are easy to merge later on... with 4 threads and specifying the output file:
+**5\.** Index the final alignment file. This will allow downstream programs to easily read data from the bam file:
 
-    samtools sort -@ 4 -o A8100.chr18.paired.sorted.bam A8100.chr18.paired.bam
-
-Do the same for the single-end file:
-
-    samtools sort -@ 4 -o A8100.chr18.singles.sorted.bam A8100.chr18.singles.bam
-
-Finally, we merge the two files into one alignment file:
-
-    samtools merge -@ 4 A8100.chr18.all.bam A8100.chr18.singles.sorted.bam A8100.chr18.paired.sorted.bam
-
-And index the final alignment file. This will allow downstream programs to easily read data from the bam file:
-
-    samtools index A8100.chr18.all.bam
+    samtools index A8100.chr18.sorted.bam
 
 You can also use 'samtools flagstat' to get a summary of the alignment:
 
-    samtools flagstat A8100.chr18.all.bam
+    samtools flagstat A8100.chr18.sorted.bam
 
 -----
 
 **6\.** In the next step, we will use another Slurm script to run all the alignment commands on the rest of the samples. First download the script:
 
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/wednesday/bwa.sh
+    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2018-August-Variant-Analysis-Workshop/master/wednesday/bwa.slurm
 
 Take a look at it and make it executable:
 
-    cat bwa.sh
-    chmod a+x bwa.sh
+    cat bwa.slurm
+    chmod a+x bwa.slurm
 
 Now use sbatch to run this script for the rest of the samples:
 

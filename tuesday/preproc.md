@@ -61,6 +61,7 @@ Can be downloaded from [here](https://github.com/ibest/HTStream). Fast C++ imple
 
 **1a\.** So let's first take a small subsample of reads, just so our trial run through the pipeline goes really quickly.
 
+    mkdir ~/variant_example
     cd ~/variant_example
     mkdir HTS_testing
     cd HTS_testing

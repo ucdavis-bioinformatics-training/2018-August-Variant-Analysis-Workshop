@@ -15,8 +15,8 @@ In this section, we will use BWA (Burrows-Wheeler Aligner) to align all of our t
 
 Link to the files we will be using for alignment:
 
-    ln -s ../01-Trimming/*.sickle.fastq .
-    ln -s ../01-Trimming/*.singles.fastq .
+    ln -s ../01-HTS_Preproc/*/*.fastq.gz .
+    ls
 
 -----
 
@@ -56,17 +56,13 @@ You should see 5 sets of files, one for each sample. Each set should contain two
     
 Note that the Usage shows that we need to give bwa a location for the 'idxbase', which is the path to the reference. Now, we will align the two paired-end files and redirect the alignment output (in SAM format) to a file. We will use 4 threads (processors) and add read group (i.e sample ID) information to the alignment:
 
-    bwa mem -t 4 -R "@RG\tID:A8100\tSM:A8100" ../ref/chr18.fa A8100.chr18.R1.sickle.fastq A8100.chr18.R2.sickle.fastq > A8100.chr18.paired.sam
+    bwa mem -t 6 -R "@RG\tID:A8100\tSM:A8100" ../ref/chr18.fa A8100_R1.fastq.gz A8100_R2.fastq.gz > A8100.chr18.paired.sam
 
-This step will take about 10 minutes to run.
+This step will take about 5 minutes to run.
 
 -----
 
-**4\.** Next, we will align the single-end file for the same sample:
-
-    bwa mem -t 4 -R "@RG\tID:A8100\tSM:A8100" ../ref/chr18.fa A8100.chr18.singles.fastq > A8100.chr18.singles.sam
-
-Then, we need to convert the sam files into bam files for downstream processing. We will use a tool called 'samtools' to do this. Load the samtools module and take a look at the various subcommands and options:
+**4\.** Then, we need to convert the sam files into bam files for downstream processing. We will use a tool called 'samtools' to do this. Load the samtools module and take a look at the various subcommands and options:
 
     module load samtools
     samtools
@@ -75,10 +71,6 @@ Then, we need to convert the sam files into bam files for downstream processing.
 We will use 'samtools view' to convert the sam files into a bam files (binary sam)... using 4 threads and the '-b' flag to output bam format:
 
     samtools view -@ 4 -b A8100.chr18.paired.sam > A8100.chr18.paired.bam
-
-Do the same for the single-end alignment file:
-
-    samtools view -@ 4 -b A8100.chr18.singles.sam > A8100.chr18.singles.bam
 
 -----
 

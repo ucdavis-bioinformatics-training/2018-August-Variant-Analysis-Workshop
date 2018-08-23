@@ -3,7 +3,7 @@
 #SBATCH --job-name=align # Job name
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=600
+#SBATCH --time=1000
 #SBATCH --mem=20000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production
 #SBATCH --reservation=workshop

@@ -97,12 +97,18 @@ Take a look at it and make it executable:
     cat bwa.slurm
     chmod a+x bwa.slurm
 
-Now use sbatch to run this script for the rest of the samples:
+Notice that the REF variable is empty. You will need to use "nano" to edit the bwa.slurm file to add the path to the reference fasta file.
 
-    sbatch bwa.sh A9004
-    sbatch bwa.sh A9006
-    sbatch bwa.sh A9014
-    sbatch bwa.sh A9018
+    nano bwa.slurm
+
+**YOU MUST ADD THE REFERENCE PATH!**
+
+Once you have done that, then use sbatch to run this script for the rest of the samples:
+
+    sbatch bwa.slurm A9004
+    sbatch bwa.slurm A9006
+    sbatch bwa.slurm A9014
+    sbatch bwa.slurm A9018
 
 This should take 20-30 minutes. Use 'squeue' to check on your processes:
 
@@ -110,13 +116,13 @@ This should take 20-30 minutes. Use 'squeue' to check on your processes:
 
 -----
 
-**7\.** Once this is done, let's take a look at the alignments using IGV. In order to do that, you will have to download the reference and alignment files to your laptop. Because the alignment files are too big to download easily, we are just going to look at a small portion of the alignment. So, first, let's extract just a portion of the alignment from all of our samples using 'samtools view', but using a region of 1 megabase:
+**7\.** Once this is done, let's take a look at the alignments using IGV. In order to do that, you will have to download the reference and alignment files to your laptop. Because the alignment files are too big to download easily, we are just going to look at a small portion of the alignment (our "Region of Interest", hence "ROI"). So, first, let's extract just a portion of the alignment from all of our samples using 'samtools view', but using a region of 1 megabase:
 
-    samtools view -b A8100.chr18.all.bam chr18:54000000-55000000 > A8100.chr18.ROI.bam
-    samtools view -b A9004.chr18.all.bam chr18:54000000-55000000 > A9004.chr18.ROI.bam
-    samtools view -b A9006.chr18.all.bam chr18:54000000-55000000 > A9006.chr18.ROI.bam
-    samtools view -b A9014.chr18.all.bam chr18:54000000-55000000 > A9014.chr18.ROI.bam
-    samtools view -b A9018.chr18.all.bam chr18:54000000-55000000 > A9018.chr18.ROI.bam
+    samtools view -b A8100.chr18.sorted.bam chr18:54000000-55000000 > A8100.chr18.ROI.bam
+    samtools view -b A9004.chr18.sorted.bam chr18:54000000-55000000 > A9004.chr18.ROI.bam
+    samtools view -b A9006.chr18.sorted.bam chr18:54000000-55000000 > A9006.chr18.ROI.bam
+    samtools view -b A9014.chr18.sorted.bam chr18:54000000-55000000 > A9014.chr18.ROI.bam
+    samtools view -b A9018.chr18.sorted.bam chr18:54000000-55000000 > A9018.chr18.ROI.bam
 
 And we have to index these new files:
 

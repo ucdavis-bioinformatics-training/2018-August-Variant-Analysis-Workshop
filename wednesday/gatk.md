@@ -120,7 +120,7 @@ Now, run all the other samples using sbatch:
     sbatch gatk.slurm A9014
     sbatch gatk.slurm A9018
 
-This will take ~7 hours to run. Once all of the samples finish, you can move on to the next step, which will probably be tomorrow.
+This will take ~3 hours to run. Once all of the samples finish, you can move on to the next step, which will probably be tomorrow.
 
 ---
 

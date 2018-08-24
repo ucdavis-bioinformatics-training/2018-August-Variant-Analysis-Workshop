@@ -148,27 +148,27 @@ This will take about 30 minutes.
 
 This will take about 30 minutes. It will produce a regular VCF file which we will further filter in the following steps. Take a look at the file:
 
-    less all.chr18.g.vcf
+    less all.genotyped.chr18.vcf
 
 -----
 
 **10\.** After the variant calling in the previous step, we will use "SelectVariants" to generate the output that only contains SNP variants. The input variant file should be the output from the previous step. Choose "SNP" as the selectType, which will get all variants that are SNPs:
 
-    gatk -T SelectVariants \
-    -R ../ref/chr18.fa --variant all.chr18.vcf -selectType SNP \
-    -o snps.chr18.vcf
+    gatk SelectVariants \
+    -R ../ref/chr18.fa --variant all.genotyped.chr18.vcf -select-type SNP \
+    -O snps.chr18.vcf
 
 The variant file generated contains only the SNP variants called by GenotypeGVCFs.
 
 -----
 
-**11\.** After the initial variant calling, a filter process needs to be done to generate a list of good variants using some type of criteria. Here we are using a set of criteria on the SNPs. We will use the "VariantFiltration" subprogram from GATK. The variant input file should be the SNP variant (VCF) file from the previous step. Our filter expression is **QD<2.0\|\|MQ<40.0\|\|FS>60.0\|\|MQRankSum<-12.5\|\|ReadPosRankSum<-8.0**, which we get from looking at the GATK best practices for small datasets. The "double-pipe" (\|\|) symbol is a logical OR, meaning that if any of those criteria are true then the variant will be tagged. Choose your canonical annotation file (chr18.vcf) as the Mask ROD file and give the filter a name:
+**11\.** After the initial variant calling, a filter process needs to be done to generate a list of good variants using some type of criteria. Here we are using a set of criteria on the SNPs. We will use the "VariantFiltration" subprogram from GATK. The variant input file should be the SNP variant (VCF) file from the previous step. Our filter expression is **QD<2.0 \|\| MQ<40.0 \|\| FS>60.0 \|\| MQRankSum<-12.5 \|\| ReadPosRankSum<-8.0**, which we get from looking at the GATK best practices for small datasets. The "double-pipe" (\|\|) symbol is a logical OR, meaning that if any of those criteria are true then the variant will be tagged. Choose your canonical annotation file (chr18.vcf) as the Mask ROD file and give the filter a name:
 
-    gatk -T VariantFiltration \
+    gatk VariantFiltration \
     -R ../ref/chr18.fa --variant snps.chr18.vcf \
-    --mask ../ref/chr18.vcf --filterName "snpsfilter" \
-    --filterExpression "QD<2.0||MQ<40.0||FS>60.0||MQRankSum<-12.5||ReadPosRankSum<-8.0" \
-    --out snps.chr18.tagged.vcf &> varfilter.out &
+    --mask ../ref/chr18.vcf --filter-name "snpsfilter" \
+    --filter-expression "QD<2.0 || MQ<40.0 || FS>60.0 || MQRankSum<-12.5 || ReadPosRankSum<-8.0" \
+    --output snps.chr18.tagged.vcf &> varfilter.out &
 
 We put the informational output to a file and run it in the background. This step will tag the variants with a "snpsfilter" tag if they did not pass and a "PASS" tag if they did. It does **not** remove the variants that did not pass.
  
@@ -176,8 +176,8 @@ We put the informational output to a file and run it in the background. This ste
 
 **12\.** After the filtration step, we need to further select only the variants that have passed the filter by running "SelectVariants" again. The input variant file is the output variant file from the previous step. Use **vc.isNotFiltered()** (including the parentheses) as the "select expression". This "select expression" was found by searching and reading help forums. Leave the other parameters as default.
 
-    gatk -T SelectVariants \
+    gatk SelectVariants \
     -R ../ref/chr18.fa --variant snps.chr18.tagged.vcf \
-    -select 'vc.isNotFiltered()' -o snps.chr18.filtered.vcf
+    -select 'vc.isNotFiltered()' -O snps.chr18.filtered.vcf
 
 Now you have a file which contains SNPs which passed the filters. We can now use these for the next stage in our analysis, which is Effect Prediction.

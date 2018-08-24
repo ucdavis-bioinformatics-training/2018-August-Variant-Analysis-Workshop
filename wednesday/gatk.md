@@ -122,10 +122,10 @@ Take a look at it:
 
 Now, run all the other samples using sbatch:
 
-    sbatch gatk.sh A9004
-    sbatch gatk.sh A9006
-    sbatch gatk.sh A9014
-    sbatch gatk.sh A9018
+    sbatch gatk.slurm A9004
+    sbatch gatk.slurm A9006
+    sbatch gatk.slurm A9014
+    sbatch gatk.slurm A9018
 
 This will take ~7 hours to run. Once all of the samples finish, you can move on to the next step, which will probably be tomorrow.
 

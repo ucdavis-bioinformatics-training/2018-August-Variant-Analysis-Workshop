@@ -51,7 +51,7 @@ samtools index ${SAMPID}.chr18.rg.bam
 
 echo "running BaseRecalibrator"
 # run base quality recalibrator to get table for next step
-gatk BaseRecalibrator -I ${SAMPID}.chr18.realigned.bam -R $REF --known-sites $KNOWN_SNPS -O ${SAMPID}.chr18.recal_data.grp
+gatk BaseRecalibrator -I ${SAMPID}.chr18.rg.bam -R $REF --known-sites $KNOWN_SNPS -O ${SAMPID}.chr18.recal_data.grp
 
 echo "creating recalibrated BAM file"
 # create recalibrated BAM using recalibration data from BaseRecalibrator step

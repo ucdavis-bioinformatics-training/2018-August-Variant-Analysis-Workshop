@@ -75,29 +75,45 @@ Now, run the script 9 times using sbatch and specifying regions of 10Mb (except 
     sbatch fb.slurm bamlist.txt chr18:70000001-80000000
     sbatch fb.slurm bamlist.txt chr18:80000001-82527541
 
+This will take about an hour to run.
+
 ---
 
-**4\.** Now, let's run delly. We are going to use delly to find large deletions in our data. 
+**4\.** When it is done, you need to merge all the vcf files into one file. First, get just the header lines for the final file from one of the files:
+
+    grep ^# freebayes.chr18.chr18:1-10000000.vcf > freebayes.chr18.all.vcf
+
+This command looks for lines that begin with the "#" character (called "comments"). The "^" character is the symbol for "beginning of line". The output is then redirected into a new file. Finally, append the variant calls from each of the vcf files, without the comment lines:
+
+    cat freebayes.chr18.chr18:1-10000000.vcf freebayes.chr18.*001*.vcf | grep -v ^# >> freebayes.chr18.all.vcf
+
+---
+
+**5\.** Now, let's run delly. We are going to use delly to find large deletions in our data. Load the module and take a look at the help pages:
 
     module load delly
     delly --help
+    delly call --help
 
 Now, run delly giving it a reference and all of our bam files:
 
-    delly -o delly.chr18.all.vcf -g ../ref/chr18.fa *.all.rmdup.bam
+    delly call -o delly.chr18.bcf -g ../ref/chr18.fa *.sorted.bam
 
-This should take about 5 minutes to run.
+This should take about 1.5 hours to run. We need to then convert the bcf file to a vcf so we can take a look at it:
+
+    module load bcftools
+    bcftools convert -o delly.chr18.vcf delly.chr18.bcf
 
 ---
 
-**5\.** Take a look at the output:
+**6\.** Take a look at the output:
 
-    less delly.chr18.all.vcf
+    less delly.chr18.vcf
 
 We want to just get the variants that "PASS", not the "LowQual" ones. So we will use a program called 'awk' to do that. 'awk' is a simple language designed for text processing in Unix. The command below looks at the 7th column ($7) on a line, and if the value of that column is "PASS", it prints out the line.
 
-	grep "^#" delly.chr18.all.vcf > delly.chr18.filtered.vcf
-    cat delly.chr18.all.vcf | awk '{ if($7=="PASS") print}' >> delly.chr18.filtered.vcf
+	grep "^#" delly.chr18.vcf > delly.chr18.filtered.vcf
+    cat delly.chr18.vcf | awk '{ if($7=="PASS") print}' >> delly.chr18.filtered.vcf
 
 Take a look at the filtered file. It should only contain "PASS" variants:
 

@@ -110,7 +110,7 @@ Once you have done that, then use sbatch to run this script for the rest of the 
     sbatch bwa.slurm A9014
     sbatch bwa.slurm A9018
 
-This should take 20-30 minutes. Use 'squeue' to check on your processes:
+This should take about 10 minutes. Use 'squeue' to check on your processes:
 
     squeue -u <your user name>
 

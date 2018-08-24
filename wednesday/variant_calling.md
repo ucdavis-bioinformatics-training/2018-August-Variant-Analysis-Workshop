@@ -97,7 +97,7 @@ This command looks for lines that begin with the "#" character (called "comments
 
 Now, run delly giving it a reference and all of our bam files:
 
-    delly call -o delly.chr18.bcf -g ../ref/chr18.fa *.sorted.bam
+    nohup delly call -o delly.chr18.bcf -g ../ref/chr18.fa *.sorted.bam &
 
 This should take about 1.5 hours to run. We need to then convert the bcf file to a vcf so we can take a look at it:
 

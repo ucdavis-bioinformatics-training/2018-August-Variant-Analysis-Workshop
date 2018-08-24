@@ -39,7 +39,7 @@ Take a look at the file:
 
 The way that we are running freebayes uses, as input, a text file containing a list of BAMs to analyze (the "-L" option). You will need to create this text file before you can run the script:
 
-    ls *.all.rmdup.bam > bamlist.txt
+    ls *.sorted.bam > bamlist.txt
 
 Check the file and make sure it looks right:
 
@@ -69,7 +69,11 @@ Now, run the script 9 times using sbatch and specifying regions of 10Mb (except 
     sbatch fb.slurm bamlist.txt chr18:10000001-20000000
     sbatch fb.slurm bamlist.txt chr18:20000001-30000000
     sbatch fb.slurm bamlist.txt chr18:30000001-40000000
-    sbatch fb.slurm bamlist.txt chr18:40000001-50000000  
+    sbatch fb.slurm bamlist.txt chr18:40000001-50000000
+    sbatch fb.slurm bamlist.txt chr18:50000001-60000000
+    sbatch fb.slurm bamlist.txt chr18:60000001-70000000
+    sbatch fb.slurm bamlist.txt chr18:70000001-80000000
+    sbatch fb.slurm bamlist.txt chr18:80000001-82527541
 
 ---
 

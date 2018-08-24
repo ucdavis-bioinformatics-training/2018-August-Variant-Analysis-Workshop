@@ -45,9 +45,11 @@ And index the resulting BAM file so that downstream software can easily navigate
     samtools faidx chr18.fa
     cd ../04-gatk
 
-Now load gatk:
+Now load gatk, take a look at the options, and the list of tools:
 
     module load gatk
+    gatk -h
+    gatk --list
 
 This sets a script in your path called "gatk" which will call the underlying gatk java file.
 

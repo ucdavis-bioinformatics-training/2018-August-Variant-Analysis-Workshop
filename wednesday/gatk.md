@@ -124,7 +124,7 @@ This will take ~7 hours to run. Once all of the samples finish, you can move on 
 
 ---
 
-**10\.** Now that we have generated our GVCF files, we need to run "GenotypeGVCFs" to join together multiple samples' GVCF files into one VCF file with aggregated genotype likelihoods and with re-annotation. We will use the "--variant" option once for each GVCF file and we will use our known SNPs file as dbsnp and use low thresholds for calling variants:
+**10\.** Now that we have generated our GVCF files, we need to run "GenotypeGVCFs" to join together multiple samples' GVCF files into one VCF file with aggregated genotype likelihoods and with re-annotation. We will use the "--variant" option once for each GVCF file and we will use our known SNPs file as dbsnp:
 
     gatk -T GenotypeGVCFs -R ../ref/chr18.fa --dbsnp ../ref/chr18.vcf \
     --variant A8100.chr18.g.vcf \

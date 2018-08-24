@@ -7,13 +7,6 @@ In this section, we are going to run [GATK](https://software.broadinstitute.org/
 
 ---
 
-GATK steps
-----------
-
-![gatk](gatk3_flow_chart.png)
-
------
-
 **1\.** First, make a directory for this section in your variant_example directory:
 
     mkdir 04-gatk

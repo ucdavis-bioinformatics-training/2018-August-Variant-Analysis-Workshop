@@ -55,7 +55,7 @@ gatk BaseRecalibrator -I ${SAMPID}.chr18.rg.bam -R $REF --known-sites $KNOWN_SNP
 
 echo "creating recalibrated BAM file"
 # create recalibrated BAM using recalibration data from BaseRecalibrator step
-gatk ApplyBQSR -R $REF -I ${SAMPID}.chr18.realigned.bam -bqsr ${SAMPID}.chr18.recal_data.grp -O ${SAMPID}.chr18.recalibrated.bam
+gatk ApplyBQSR -R $REF -I ${SAMPID}.chr18.rg.bam -bqsr ${SAMPID}.chr18.recal_data.grp -O ${SAMPID}.chr18.recalibrated.bam
 
 echo "running haplotypecaller"
 gatk HaplotypeCaller -R $REF -ERC GVCF -I ${SAMPID}.chr18.recalibrated.bam -O ${SAMPID}.chr18.g.vcf

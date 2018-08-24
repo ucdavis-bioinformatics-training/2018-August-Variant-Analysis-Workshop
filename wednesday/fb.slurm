@@ -15,6 +15,8 @@ BAMLIST=$1
 REGION=$2
 REF=../ref/chr18.fa
 
+echo Region $REGION
+
 module load freebayes
 
 freebayes -L $BAMLIST -f $REF --region $REGION --vcf freebayes.chr18.$REGION.vcf

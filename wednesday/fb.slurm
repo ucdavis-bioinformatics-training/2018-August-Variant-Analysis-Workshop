@@ -3,7 +3,7 @@
 #SBATCH --job-name=freebayes # Job name
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=600
+#SBATCH --time=300
 #SBATCH --mem=40000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production
 #SBATCH --reservation=workshop

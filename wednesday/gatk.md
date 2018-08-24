@@ -93,7 +93,7 @@ This step takes about 4 minutes.
     -R ../ref/chr18.fa -ERC GVCF \
     -I A8100.chr18.recalibrated.bam -O A8100.chr18.g.vcf &> A8100.chr18.nohup &
 
-Now this command is running in the background and will continue to run even if you log out. It will take about 4 hours to run. You can watch the progress using the 'tail' command:
+Now this command is running in the background and will continue to run even if you log out. It will take about 3 hours to run. You can watch the progress using the 'tail' command:
 
     tail -f A8100.chr18.nohup
 

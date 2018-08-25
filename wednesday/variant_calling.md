@@ -91,18 +91,14 @@ This command looks for lines that begin with the "#" character (called "comments
 
 **5\.** Now, let's run delly. We are going to use delly to find large deletions in our data. Load the module and take a look at the help pages:
 
-    module load delly
+    module load delly/0.7.2
     delly --help
-    delly call --help
 
 Now, run delly giving it a reference and all of our bam files:
 
-    nohup delly call -o delly.chr18.bcf -g ../ref/chr18.fa *.sorted.bam &
+    delly -o delly.chr18.vcf -g ../ref/chr18.fa *.sorted.bam
 
-This should take about 1.5 hours to run. We need to then convert the bcf file to a vcf so we can take a look at it:
-
-    module load bcftools
-    bcftools convert -o delly.chr18.vcf delly.chr18.bcf
+This should take about 15 minutes to run.
 
 ---
 

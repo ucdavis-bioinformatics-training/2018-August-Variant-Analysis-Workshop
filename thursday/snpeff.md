@@ -60,7 +60,7 @@ Now, link to the reference file, but call it "sequences.fa":
 
 And get the annotation file:
 
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/thursday/chr18.gtf
+    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2018-August-Variant-Analysis-Workshop/master/thursday/chr18.gtf
 
 Change its name to 'genes.gtf':
 
@@ -86,7 +86,7 @@ Now run the prediction:
 
     java -jar snpEff/snpEff.jar eff chr18 freebayes.chr18.all.vcf > snpeff.chr18.vcf
 
-This will take about 8 minutes to run.
+This will take about 7 minutes to run.
 
 ---
 
@@ -98,7 +98,7 @@ Also, download (to your laptop) and take a look at the 'snpEff_summary.html' fil
 
 ---
 
-**8\.** The next step is to filter our variants. To do that we will use 'snpsift'i, which is part of the snpeff package. SnpSift allows you to filter a VCF file on any of the fields, filter based on specific sample genotypes, as well as many other things. First take a look at the options for SnpEff:
+**8\.** The next step is to filter our variants. To do that we will use 'snpsift', which is part of the snpeff package. SnpSift allows you to filter a VCF file on any of the fields, filter based on specific sample genotypes, as well as many other things. First take a look at the options for SnpEff:
 
     java -jar snpEff/SnpSift.jar -h
 
@@ -137,12 +137,12 @@ The expression obeys the standard parentheses grouping rules. So what does the a
 **11\.** Compare this file with the file we got from GATK:
 
     grep -v ^# snpeff.chr18.vcf | wc -l
-    grep -v ^# ../04-gatk/all.chr18.vcf | wc -l
+    grep -v ^# ../04-gatk/all.genotyped.chr18.vcf | wc -l
 
 Are the number of variants the same? If not, why not? Also, we can use 'bedtools' to look at the intersection (bedtools will work on BED as well as VCF format files):
 
-    module load bedtools
-    bedtools intersect -a snpeff.chr18.vcf -b ../04-gatk/all.chr18.vcf | wc -l
+    module load bedtools2
+    bedtools intersect -a snpeff.chr18.vcf -b ../04-gatk/all.genotyped.chr18.vcf | wc -l
 
 This gives you the number of variants that intersect between the two.
 
@@ -168,15 +168,15 @@ will extract the chromosome, position, and effect for every variant.
 
 **14\.** Now, let's take a look at the file that delly produced. Let's see if we can find the deletion from the paper. First, link in the file:
 
-    ln -s ../03-freebayes/delly.chr18.all.vcf
+    ln -s ../03-freebayes/delly.chr18.vcf
 
 Now, in our example, sample A8100 is the diseased sample and the rest are controls. So, we want to find a deletion that occurs in A8100 and NOT in the others. We can filter based on genotypes using "GEN". So, for example:
 
-    java -jar snpEff/SnpSift.jar filter "isVariant(GEN[0])" delly.chr18.all.vcf | less
+    java -jar snpEff/SnpSift.jar filter "isVariant(GEN[0])" delly.chr18.vcf | less
 
 will look for any variants that occur in the first sample (1st sample is 0, 2nd sample is 1, etc.). This command:
 
-    java -jar snpEff/SnpSift.jar filter "isVariant(GEN[0]) & isHom(GEN[0]) & FILTER='PASS'" delly.chr18.all.vcf | less
+    java -jar snpEff/SnpSift.jar filter "isVariant(GEN[0]) & isHom(GEN[0]) & FILTER='PASS'" delly.chr18.vcf | less
 
 will look for any variants that occur in the first sample AND are homozygous AND where the FILTER column has a value of 'PASS' (like we did with 'awk' after using delly). Finally, try to construct the expression you would need to find the deletion we are looking for. You will need to use 'isRef' to test for samples that genotype reference.
 

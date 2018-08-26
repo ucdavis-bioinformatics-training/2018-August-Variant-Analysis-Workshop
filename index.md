@@ -1,3 +1,5 @@
+2018 August Variant Analysis Workshop, August 27th - 31st
+
 Monday
 ----------
 
@@ -13,7 +15,7 @@ Monday
 Tuesday
 ----------
 
-* [Files and Filetypes for Genomes/Annotation](tuesday/filetypes) (talk)
+* [Files and Filetypes for Genomes/Annotation](tuesday/Filetypes.pdf) (talk)
 * [Experimental Design and Cost Estimation](tuesday/ExperimentalDesign.pdf) (talk)
 * [Intro to the Research: Occipitoatlantoaxial Malformation](tuesday/OAAM.pdf)
 * [Preprocessing Data hands-on](tuesday/preproc)
@@ -25,10 +27,10 @@ Wednesday
 
 * [Aligners](wednesday/aligners) (talk)
 * [Aligning Data and IGV](wednesday/alignment)
-* [Files and Filetypes for Genomes/Annotation - sam/bam](tuesday/filetypes) (talk)
+* [Files and Filetypes for Genomes/Annotation - sam/bam](tuesday/Filetypes.pdf) (talk)
 * [Genome Assembly and Annotation](wednesday/GenomeAssembly.pdf) (talk)
 * [Variant calling with Freebayes & Delly](wednesday/variant_calling)
-* [Files and Filetypes for Genomes/Annotation - vcf](tuesday/filetypes) (talk)
+* [Files and Filetypes for Genomes/Annotation - vcf](tuesday/Filetypes.pdf) (talk)
 
 
 Thursday

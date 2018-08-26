@@ -137,7 +137,7 @@ Lets take a look at the output of stats
     ls -lah
 
 ```
-msettles@ganesh: HTS_testing$ls -lah
+msettles@tadpole: HTS_testing$ls -lah
 total 20M
 drwxr-xr-x 2 joshi biocore    7 Aug 22 01:43 .
 drwxr-xr-x 3 joshi biocore    4 Aug 22 01:25 ..
@@ -245,7 +245,7 @@ First, view the help documentation for hts_SeqScreener
     hts_SeqScreener -h
 
 ```
-msettles@ganesh: HTS_testing$hts_SeqScreener -h
+msettles@tadpole: HTS_testing$hts_SeqScreener -h
 HTStream <https://github.com/ibest/HTStream> application: hts_SeqScreener
 Version: 0.3.1
 hts_SeqScreener identifies and removes any reads which appear to have originated

@@ -5,11 +5,11 @@ Running jobs on the cluster and using modules
 
 ![cluster diagram](cluster_diagram.png)
 
-The basic architecture of a compute cluster consists of a "head node", which is the computer from which a user submits jobs to run, and "compute nodes", which are a large number of computers on which the jobs can be run. It is also possible to log into a compute node and run jobs directly from there. **Never run a job directly on the head node!** However, that being said, we will be logging into a server that isn't the head node in order to run our jobs. This server (ganesh.genomecenter.ucdavis.edu) is owned by the Bioinformatics Core and can be used to run jobs on the cluster and can also be used to run jobs directly on it.
+The basic architecture of a compute cluster consists of a "head node", which is the computer from which a user submits jobs to run, and "compute nodes", which are a large number of computers on which the jobs can be run. It is also possible to log into a compute node and run jobs directly from there. **Never run a job directly on the head node!** However, that being said, we will be logging into a server that isn't the head node in order to run our jobs. This server (tadpole.genomecenter.ucdavis.edu) is owned by the Bioinformatics Core and can be used to run jobs on the cluster and can also be used to run jobs directly on it.
 
 ---
 
-**2\.** Now, let's look at the commands. First, log into ganesh (ganesh.genomecenter.ucdavis.edu). The main command we will be using is 'sbatch', but you should also know about the command 'srun'. 'srun' is used to run a single command on a compute node or to log into a compute node directly. Take a look at the options to srun:
+**2\.** Now, let's look at the commands. First, log into tadpole (tadpole.genomecenter.ucdavis.edu). The main command we will be using is 'sbatch', but you should also know about the command 'srun'. 'srun' is used to run a single command on a compute node or to log into a compute node directly. Take a look at the options to srun:
 
     srun --help
 

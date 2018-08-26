@@ -57,7 +57,7 @@ The 'scancel' command is used to cancel jobs (either running or waiting). You ca
 
 The 'sacct' command is used to get accounting data for any job that has ever run, using the job ID.
 
-You can get more information about each command by typing "<command> --help" or by looking at [this summary page](https://slurm.schedmd.com/pdfs/summary.pdf).
+You can get more information about each command by typing "<command> \-\-help" or by looking at [this summary page](https://slurm.schedmd.com/pdfs/summary.pdf).
 
 ---
 

@@ -20,7 +20,7 @@ For Macs/Linux - Transferring files
 
         scp [your username]@tadpole.genomecenter.ucdavis.edu:[full path to file] .
 
-   Replace '[your username]' with your username and replace '[full path to file]' with the full path to the file you want to transfer. Note that there is a "." at the end of the command, which is where to put the file, i.e. your current directory. You will have to type in your password.
+   Replace '[your username]' with your username and replace '[full path to file]' with the full path to the file you want to transfer. Note that there is a "." at the end of the command, which is where to put the file, i.e. your current directory. You will have to type in your password, which you will not see any characters for, not even "\*".
 
 For Windows - Logging In
 -------------------------

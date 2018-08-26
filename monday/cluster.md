@@ -17,7 +17,7 @@ The way we have set up our cluster requires that you specify a time limit and ma
 
     srun -t 1440 -c 4 -n 1 --mem 8000 --reservation workshop --partition production --pty /bin/bash
 
-This command is requesting a compute node with a time limit of 1440 minutes (i.e. 24 hours), one processor, a max memory of 8000Mb (i.e. 8Gb), using a compute reservation for this workshop (an option you would not normally use), and then finally, specifying a shell to run in a terminal ("--pty" option). Run this command to get to a compute node when you want to run jobs on the command-line directly. Exit from this shell:
+This command is requesting a compute node with a time limit of 1440 minutes (i.e. 24 hours), one processor, a max memory of 8000Mb (i.e. 8Gb), using a compute reservation for this workshop (an option you would not normally use), specifying the partition (i.e. the type of queue) to run on, and then finally, specifying a shell to run in a terminal ("--pty" option). Run this command to get to a compute node when you want to run jobs on the command-line directly. Now, exit from this shell:
 
     exit
 

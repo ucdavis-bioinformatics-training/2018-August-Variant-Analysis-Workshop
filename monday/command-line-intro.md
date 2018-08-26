@@ -11,7 +11,7 @@ Getting There
 
 Secure SHell ... ssh.
 
-    ssh [class#@]tadpole.genomecenter.ucdavis.edu
+    ssh [username]@tadpole.genomecenter.ucdavis.edu  # replace [username] with jfass, for example ... omit the brackets!
 
 You should immediately "log in" (start an interactive srun session) to the cluster, to avoid accidentally running anything that takes any processor time or memory on the shared head node (cabernet).
 
@@ -43,7 +43,7 @@ Command Line Basics
 First some basics - how to look at your surroundings.
 
     pwd  # present working directory ... where am I?
-    ls   # list files here ... you should see nothing since your 'class##' homes are empty
+    ls   # list files here ... you should see nothing since your homes are empty
     ls /tmp/  # list files somewhere else
 
 Let's run our first command ... because one of the first things that's good to know is *how to escape once you've started something you don't want*.
@@ -56,6 +56,7 @@ Let's run our first command ... because one of the first things that's good to k
     R  # enter R interactive session
     <ctrl-d>
     # Try this fun command:
+j
     yes  # that's a lot of yes
     <ctrl-c>
     yes | more  # "pipe," or direct, the yes output to the 'more' command
@@ -112,7 +113,7 @@ The filesystem you're working on is like the branching root system of a tree. Th
     cd /  # go to root of tree's root system
     cd home  # go to where everyone's homes are
     pwd
-    cd class10  # use your actual home, not class10
+    cd username  # use your actual home, not "username"
     pwd
     cd /
     pwd
@@ -132,17 +133,17 @@ Absolute and Relative Paths
 The sequence above was probably confusing, if you're not used to navigating filesystems this way. You can think of paths like addresses. You can tell your friend how to go to a particular store *from where they are currently* (a "relative" path), or *from the main Interstate Highway that everyone uses* (in this case, the root of the filesystem, '/' ... this is an "absolute" path). Both are valid. But absolute paths can't be confused, because they tell you where to start off, and all the steps along the way. Relative paths, on the other hand, could be totally wrong for your friend *if you assume they're somewhere they're not*. With this in mind, let's try a few more:
 
     cd ~  # let's start at home
-    cd ../../home/class10/  # *relative* (start here, take two steps up, then down through home and class10)
+    cd ../../home/username/  # *relative* (start here, take two steps up, then down through home and class10)
     pwd
-    cd /home/class10/  # *absolute* (start at root, take steps)
+    cd /home/username/  # *absolute* (start at root, take steps)
     pwd
 
 Linux also tolerates "empty" steps and loops, even if they look ugly. So:
 
     cd  # starting at your home again
-    cd /home//class10/  # used two slashes; it's treated as an empty step
-    cd ../class10/../class10/../class10/  # back and forth a few times.
-    cd /software/bwa/../bowtie/../../home/class10/  # are you lost or something?
+    cd /home//username/  # used two slashes; it's treated as an empty step
+    cd ../username/../username/../username/  # back and forth a few times.
+    cd /software/bwa/../bowtie/../../home/username/  # are you lost or something?
 
 There's no real point to such weird paths, but it helps illustrate how paths work. In the last example, an absolute path, we start at the root of the filesystem (the initial '/'), move down into the 'software' directory, then down from there into the 'bwa' directory, then back up (into the software directory), down into 'bowtie', then up twice (which gets you back to the root directory), then down through the familiar 'home' and your own 'class##' directories. Now, wasn't that a pain to type out all those directory names? So, let's discuss ... 
 
@@ -478,7 +479,7 @@ Finally, the 'nohup' command (from "no hangup"!) makes jobs extra resistant to l
 
     nohup sleep 1000000 &
     # [1] 34993
-    # class##@c4-0:~/CLB$ nohup: ignoring input and appending output to ‘nohup.out’
+    # username@c4-0:~/CLB$ nohup: ignoring input and appending output to nohup.out
     jobs
     # [1]+  Running                 nohup sleep 1000000 &
     # output is dumped into the 'nohup.out' file unless specifically redirected in your command
@@ -491,6 +492,7 @@ Table of Processes
 The 'top' command prints a self-updating table of running processes and system stats. Use 'q' to exit top, 'z' to toggle better color contrast, 'M' to sort by memory use, 'P' to sort by processor use, and 'c' to toggle display of the full commands. Hit '1' to toggle display of all processors, and hit 'u' followed by typing in a username in order to only show processes (jobs) owned by that user.
 
 ![top-example](top.png)
+
 
 Shell Scripts, File Permissions
 --------------------------------

@@ -9,7 +9,7 @@ In this section, we will use BWA (Burrows-Wheeler Aligner) to align all of our t
 
 **1\.** First go back to your variant_example directory and create a new directory called '02-Alignment':
 
-    cd ~/variant_example
+    cd /share/workshop/<your username>/variant_example
     mkdir 02-Alignment
     cd 02-Alignment
 
@@ -22,7 +22,7 @@ Link to the files we will be using for alignment:
 
 **2\.** Now, in order to align any data, we need a reference to align against. We have reduced the size of our dataset (by selecting only one chromosome) so that the steps will occur relatively quickly. We have also reduced the genome down to just one chromosome, so that the alignment steps will happen quickly. First, create a directory for the reference and then copy the reference:
 
-    cd ~/variant_example
+    cd /share/workshop/<your username>/variant_example
     mkdir ref
     cd ref
     cp /share/biocore/workshops/Variant-Analysis-Workshop/ref/chr18.fa .

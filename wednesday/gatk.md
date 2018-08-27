@@ -9,6 +9,7 @@ In this section, we are going to run [GATK](https://software.broadinstitute.org/
 
 **1\.** First, make a directory for this section in your variant_example directory:
 
+    cd /share/workshop/<your username>/variant_example
     mkdir 04-gatk
     cd 04-gatk
 

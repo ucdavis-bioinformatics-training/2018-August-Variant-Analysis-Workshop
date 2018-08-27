@@ -9,7 +9,7 @@ In this section we will be using a software called 'snpeff' to do effect predict
 
 **1\.** As before, let's create a directory for this section:
 
-    cd ~/variant_example
+    cd /share/workshop/<your username>/variant_example
     mkdir 05-snpeff
     cd 05-snpeff
 

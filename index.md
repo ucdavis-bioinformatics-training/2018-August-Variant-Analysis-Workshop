@@ -1,4 +1,12 @@
-2018 August Variant Analysis Workshop, August 27th - 31st
+---
+title: Variant Analysis Workshop Home - Aug 27-31, 2018
+---
+
+Cheat Sheets
+=======
+
+[Cheat Sheets](cheatSheetIndex.md)
+
 
 Monday
 ----------
@@ -52,4 +60,4 @@ Friday
 Evaluation!
 -----------
 
-Please help us improve future workshops, for you and others, by filling out an [evaluation](https://goo.gl/forms/ZuiO1QMECho61kJY2).
+Please help us improve future workshops, for you and others, by filling out an [evaluation]().

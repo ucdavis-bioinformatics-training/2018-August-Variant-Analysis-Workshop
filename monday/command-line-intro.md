@@ -341,7 +341,7 @@ However, some commands try to be 'smarter' about this behavior, so it's a little
 
     echo `$VRBL`  # tries to execute a command with the name *someText*
     newVRBL=`echo $VRBL`
-    echo $vewVRBL
+    echo $newVRBL
 
 Delightfully confusing, eh? Just be prepared to experiment.
 

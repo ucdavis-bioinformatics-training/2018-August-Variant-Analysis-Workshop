@@ -1,7 +1,7 @@
 Running jobs on the cluster and using modules
 ===============================================
 
-**1\.** Here at the UC Davis Bioinformatics Core we have a large computational cluster (named cabernet) that we use for our analyses. The job scheduling system we use on this cluster is called [Slurm](https://slurm.schedmd.com/). In this section, we will go through examples of the commands we will be using to interact with the cluster. First, what is a cluster?
+**1\.** Here at the UC Davis Bioinformatics Core we have a large computational cluster (named LSSC0) that we use for our analyses. The job scheduling system we use on this cluster is called [Slurm](https://slurm.schedmd.com/). In this section, we will go through examples of the commands we will be using to interact with the cluster. First, what is a cluster?
 
 ![cluster diagram](cluster_diagram.png)
 
@@ -17,7 +17,7 @@ The way we have set up our cluster requires that you specify a time limit and ma
 
     srun -t 1440 -c 4 -n 1 --mem 8000 --reservation workshop --partition production --pty /bin/bash
 
-This command is requesting a compute node with a time limit of 1440 minutes (i.e. 24 hours), one processor, a max memory of 8000Mb (i.e. 8Gb), using a compute reservation for this workshop (an option you would not normally use), and then finally, specifying a shell to run in a terminal ("--pty" option). Run this command to get to a compute node when you want to run jobs on the command-line directly. Exit from this shell:
+This command is requesting a compute node with a time limit of 1440 minutes (i.e. 24 hours), one processor, a max memory of 8000Mb (i.e. 8Gb), using a compute reservation for this workshop (an option you would not normally use), specifying the partition (i.e. the type of queue) to run on, and then finally, specifying a shell to run in a terminal ("--pty" option). Run this command to get to a compute node when you want to run jobs on the command-line directly. Now, exit from this shell:
 
     exit
 
@@ -29,16 +29,16 @@ This command is requesting a compute node with a time limit of 1440 minutes (i.e
 
 Generally, we do not use any options for sbatch... we typically give it a script (i.e. a text file with commands inside) to run. Let's take a look at a template script:
 
-    wget https://ucdavis-bioinformatics-training.github.io/2017-August-Variant-Analysis-Workshop/monday/slurm.sh
-    cat slurm.sh
+    wget https://ucdavis-bioinformatics-training.github.io/2018-August-Variant-Analysis-Workshop/monday/template.slurm
+    cat template.slurm
 
 The first line tells sbatch what scripting language the rest of the file is in. Any line that begins with a "#" symbol is ignored, except lines that begin with "#SBATCH". Those lines are for specifying sbatch options without having to type them on the command-line every time. In this script, on the next set of lines, we've put some code for calculating the time elapsed for the job. Then, we set up the variables for the rest of the script. In this case, "$1" refers to the first argument to the script. So, for example, when you would run this script, you would run it using a sample name like so (**don't actually run this command yet!**):
 
-    sbatch slurm.sh A8100
+    sbatch template.slurm A8100
 
 So the script takes "A8100" and puts it into the variable "$1". We then copy that into another variable called "sample", for more clarity. Then we use "$sample" to construct the names of the forward (R1) and reverse (R2) read files. The utility of doing this is that we can reuse the same script to run every sample. So to run another sample, we would do this (**again, do not run this command!**):
 
-    sbatch slurm.sh A9004
+    sbatch template.slurm A9004
 
 Now, after the variable section, we load the modules that we will be using for this job. Finally, we run the actual commands using the variable names we created earlier. "${sample}" gets replaced with the actual sample name when it runs. And then at the end we calculate and print out the elapsed time.
 
@@ -57,7 +57,7 @@ The 'scancel' command is used to cancel jobs (either running or waiting). You ca
 
 The 'sacct' command is used to get accounting data for any job that has ever run, using the job ID.
 
-You can get more information about each command by typing "<command> --help" or by looking at [this summary page](https://slurm.schedmd.com/pdfs/summary.pdf).
+You can get more information about each command by typing "<command> \-\-help" or by looking at [this summary page](https://slurm.schedmd.com/pdfs/summary.pdf).
 
 ---
 

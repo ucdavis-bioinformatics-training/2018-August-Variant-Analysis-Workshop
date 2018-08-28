@@ -227,11 +227,11 @@ Save this file to your computer, and rename it to 'rrna.fasta'.
 Now, make a directory in your "variant_example" directory called "ref":
 
     cd variant_example
-    mkdir variant_example/ref
+    mkdir ref
 
 Upload your rrna.fasta file **to the 'ref' directory** on the cluster using either **scp** or FileZilla. Or if you feel like cheating, paste the contents of rrna.fa using nano into a file named variant_example/ref/rrna.fasta
 
-    nano variant_example/ref/rrna.fasta # paste contents of rrna.fa and save
+    nano ref/rrna.fasta # paste contents of rrna.fa and save
 
 ---
 

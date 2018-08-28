@@ -5,7 +5,7 @@
 #SBATCH --ntasks=9
 #SBATCH --time=60
 #SBATCH --mem=3000 # Memory pool for all cores (see also --mem-per-cpu)
-#SBATCH --partition=gc
+#SBATCH --partition=production
 #SBATCH --reservation=workshop
 #SBATCH --array=1-24
 #SBATCH --output=slurmout/htstream_%A_%a.out # File to which STDOUT will be written

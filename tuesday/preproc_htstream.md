@@ -436,14 +436,14 @@ Comparing star mapping with raw and preprocessed reads
 
 **5.** Lets put it all together
 
-    hts_Stats -O -L C61_htsStats.log -1 C61.subset_R1.fastq.gz -2 C61.subset_R2.fastq.gz | \
-    hts_SeqScreener -S -O -A -L C61_htsStats.log | \
-    hts_SuperDeduper -e 250000 -S -O -A -L C61_htsStats.log | \
-    hts_AdapterTrimmer -n -S -O -A -L C61_htsStats.log | \
-    hts_QWindowTrim -n -S -O -A -L C61_htsStats.log | \
-    hts_NTrimmer -n -S -O -A -L C61_htsStats.log | \
-    hts_CutTrim -n -m 50 -S -O -A -L C61_htsStats.log | \
-    hts_Stats -S -A -L C61_htsStats.log -g -p C61.htstream
+    hts_Stats -O -L A8100_htsStats.log -1 A8100.subset.chr18.R1.fastq.gz -2 A8100.subset.chr18.R2.fastq.gz | \
+    hts_SeqScreener -S -O -A -L A8100_htsStats.log | \
+    hts_SuperDeduper -e 250000 -S -O -A -L A8100_htsStats.log | \
+    hts_AdapterTrimmer -n -S -O -A -L A8100_htsStats.log | \
+    hts_QWindowTrim -n -S -O -A -L A8100_htsStats.log | \
+    hts_NTrimmer -n -S -O -A -L A8100_htsStats.log | \
+    hts_CutTrim -n -m 50 -S -O -A -L A8100_htsStats.log | \
+    hts_Stats -S -A -L A8100_htsStats.log -g -p A8100.htstream
 
 Note the patterns:
 * In the first routine we use -1 and -2 to specify the original reads and -O to output to standard output.

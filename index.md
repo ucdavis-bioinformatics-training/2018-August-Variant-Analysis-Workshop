@@ -25,8 +25,7 @@ Tuesday
 * [Files and Filetypes for Genomes/Annotation](tuesday/Filetypes.pdf) (talk)
 * [Experimental Design and Cost Estimation](tuesday/Variant_Analysis.pdf) (talk)
 * [Intro to the Research: Occipitoatlantoaxial Malformation](tuesday/OAAM.pdf)
-* [Preprocessing Data hands-on](tuesday/preproc)
-* [Philosophy of Preprocessing Data](tuesday/Preprocessing.pdf) (talk)
+* [Preprocessing Data hands-on](tuesday/preproc_htstream.md)
 
 
 Wednesday

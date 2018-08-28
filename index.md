@@ -32,8 +32,8 @@ Tuesday
 Wednesday
 ----------
 
-* [Aligners](wednesday/aligners) (talk)
-* [Aligning Data and IGV](wednesday/Aligners.pdf)
+* [Aligners](wednesday/Aligners.pdf) (talk)
+* [Aligning Data and IGV](wednesday/alignment)
 * [Files and Filetypes for Genomes/Annotation - sam/bam](tuesday/Filetypes.pdf) (talk)
 * [Genome Assembly and Annotation](wednesday/GenomeAssembly.pdf) (talk)
 * [Variant calling with Freebayes & Delly](wednesday/variant_calling)

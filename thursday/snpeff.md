@@ -9,7 +9,7 @@ In this section we will be using a software called 'snpeff' to do effect predict
 
 **1\.** As before, let's create a directory for this section:
 
-    cd ~/variant_example
+    cd /share/workshop/<your username>/variant_example
     mkdir 05-snpeff
     cd 05-snpeff
 
@@ -180,7 +180,7 @@ will look for any variants that occur in the first sample (1st sample is 0, 2nd 
 
 will look for any variants that occur in the first sample AND are homozygous AND where the FILTER column has a value of 'PASS' (like we did with 'awk' after using delly). Finally, try to construct the expression you would need to find the deletion we are looking for. You will need to use 'isRef' to test for samples that genotype reference.
 
-If you are unable to get it, [click here](command.txt) to see the command.
+If you are unable to figure it out, [click here](command.txt) to see the command.
 
 ---
 

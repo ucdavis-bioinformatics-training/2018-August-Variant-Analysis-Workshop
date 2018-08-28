@@ -9,7 +9,7 @@ Now we will call variants (SNPs and indels) using two different programs, 'freeb
 
 **1\.** First, create a new directory for calling variants:
 
-    cd ~/variant_example
+    cd /share/workshop/<your username>/variant_example
     mkdir 03-freebayes
     cd 03-freebayes
 

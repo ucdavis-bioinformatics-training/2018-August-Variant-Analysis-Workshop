@@ -230,19 +230,6 @@ The '>' character redirects output of a command that would normally go to the sc
 
 This is a great way to build up a set of operations while inspecting the output of each step in turn. We'll do more of this in a bit.
 
-REALLY CHALLENGING CHALLENGE
--------------------------------
-
-We (the Bioinformatics Core) install all of the biology-related tools in the '/software/' directory, in our spare time. Are we more productive at any time of the year? So, the idea is to look at the dates the software was installed and find when the most installations occurred.
-
-* HINT #1: Use the 'man' pages for tools we've seen already.
-* HINT #2: Sometimes it's useful to turn several of the same character into only one ... for example:
-
-    tr "LOOOOL" "LOL"
-
-But maybe there's a way to make this behavior more general? See the man page for the translate command 'tr'.
-* HINT #3: Got a sorted list? Squeeze all repeated entries into one using the 'uniq' command. But maybe 'uniq' can do more than just squeeze repeats.
-
 
 History Repeats Itself
 -----------------------
@@ -340,14 +327,6 @@ When we want to specify or operate on sets of files all at once.
     find . -name "*.fa"
     find . -name "*.f?"  # how is this different from the previous command?
 
-SOMEWHAT CHALLENGING CHALLENGE
----------------------------------
-
-Many types of software, including GNU/Linux itself, have directories named 'bin' at various levels, which are meant to hold the 'binary', compiled, executable tools themselves (as opposed to notes about the tools, data files, source code used to create the binaries, etc.). See if you can count how many 'bin' directories are in the /software directories.
-
-* HINT #1: The 'find' man page is wild and wooly; try searching for the *second* occurrence of the text '-type c'.
-* HINT #2: Acquaint yourself with the useful 'wc' tool.
-* HINT #3: The /software directory is a little special. Try searching *underneath* it, whatever that's supposed to mean. 
 
 Quick Note About the Quote(s)
 -------------------------------
@@ -362,7 +341,7 @@ However, some commands try to be 'smarter' about this behavior, so it's a little
 
     echo `$VRBL`  # tries to execute a command with the name *someText*
     newVRBL=`echo $VRBL`
-    echo $vewVRBL
+    echo $newVRBL
 
 Delightfully confusing, eh? Just be prepared to experiment.
 
@@ -398,7 +377,7 @@ This may not be a particularly useful thing to do with a genomic FASTA file, but
 CHALLENGE
 ----------
 
-The commands above only find start codons on the forward strand. How would you find the most common *first codons* (after the ATG) on the reverse strand? BONUS: Can you add these in with the codons from the example above, and count them all at once?
+The commands above only find start codons on the forward strand. How would you find the most common *first codons* (after the ATG) on the reverse strand?
 
 Symbolic Links
 ---------------

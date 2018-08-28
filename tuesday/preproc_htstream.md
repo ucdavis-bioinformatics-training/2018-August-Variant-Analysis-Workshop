@@ -125,8 +125,8 @@ Please report any issues, request for enhancement, or comments to <https://githu
 So now lets run hts_Stats and look at the output.
 
     hts_Stats -1 A8100.subset.chr18.R1.fastq.gz \
-              -2 A8100.subset.chr18.R1.fastq.gz \
-              -L AB100.stats.log -f -g -p AB100.stats
+              -2 A8100.subset.chr18.R2.fastq.gz \
+              -L A8100.stats.log -f -g -p A8100.stats
 
 *What parameters did we use, what do they do?*
 

@@ -1,4 +1,15 @@
-if (!any(rownames(installed.packages()) == "rjson")) install.packages("rjson")
+# R Script to create a summary table from HTS_stream on DNA samples
+# Assumes HTSstream was run with the following apps in the following order
+# hts_Stats
+# hts_SeqScreener
+# hts_SuperDeduper
+# hts_AdapterTrimmer
+# hts_QWindowTrim
+# hts_NTrimmer
+# hts_CutTrim
+# hts_Stats
+
+if (!any(rownames(installed.packages()) == "rjson")) install.packages("rjson", repos = "http://cran.us.r-project.org")
 require(rjson)
 
 samples <- readLines("samples.txt")
@@ -16,22 +27,8 @@ apps <- apply(sapply(hts_json,names),1, function(x) unique(sub("_[0-9]+$","",x))
 napps <- length(apps)
 apps <- make.names(apps, unique = T)
 
-check_apps <- c("hts_Stats", "hts_SeqScreener", "hts_SuperDeduper", "hts_SeqScreener.1", "hts_AdapterTrimmer", "hts_QWindowTrim", "hts_NTrimmer", "hts_CutTrim", "hts_Stats.1")
+check_apps <- c("hts_Stats", "hts_SeqScreener", "hts_SuperDeduper", "hts_AdapterTrimmer", "hts_QWindowTrim", "hts_NTrimmer", "hts_CutTrim", "hts_Stats.1")
 if (!(length(check_apps) == length(apps) && all(check_apps == apps))) stop("expected sequence of apps not found")
-
-## Table of total reads output after each stage
-#totalReadsOut <- as.data.frame(sapply(hts_json,function(x) sapply(x, "[[","totalFragmentsOutput")))
-#rownames(totalReadsOut) <- apps
-#colnames(totalReadsOut) <- samples
-
-### Super Deduper Saturation Plot
-# sd <- which(apps == "hts_SuperDeduper")
-# if(length(sd) > 1) stop("More than one hts super deduper found, which makes little sense")
-#
-# if (length(sd) == 1){
-#   ds <- lapply(hts_json,function(x) x[[sd]]$duplicate_saturation)
-#   plot(cumsum(diff(sapply(ds[[2]],"[[",1L))),diff(sapply(ds[[2]],"[[",2L))/diff(sapply(ds[[2]],"[[",1L)),type='l')
-# }
 
 ## Pre-Stats
 statsTotalReadsIn <- sapply(hts_json,function(x) sapply(x[1], "[[","totalFragmentsInput"))
@@ -51,44 +48,40 @@ SdTotalReadsIn <- sapply(hts_json,function(x) sapply(x[3], "[[","totalFragmentsI
 SdTotalReadsIgnored <- sapply(hts_json,function(x) sapply(x[3],"[[","ignored"))
 SdTotalReadsDuplicate <- sapply(hts_json,function(x) sapply(x[3],"[[","duplicate"))
 
-## Seq Screen rRNA
-#seqScr2TotalReadsIn <- sapply(hts_json,function(x) sapply(x[4], "[[","totalFragmentsInput"))
-#seqScr2TotalReadsHits <- sapply(hts_json,function(x) unlist(sapply(x[4],"[[","Paired_end")[c("PE_hits"),]))
-
 ## Adapter Trimmer
-AdaptTotalReadsIn <- sapply(hts_json,function(x) sapply(x[5], "[[","totalFragmentsInput"))
-AdaptTotalAdaptTrim <- sapply(hts_json,function(x) unlist(sapply(x[5],"[[","Paired_end")[c("PE_adapterTrim"),]))
-AdaptTotalBpTrim <- sapply(hts_json,function(x) unlist(sapply(x[5],"[[","Paired_end")[c("PE_adapterBpTrim"),]))
+AdaptTotalReadsIn <- sapply(hts_json,function(x) sapply(x[4], "[[","totalFragmentsInput"))
+AdaptTotalAdaptTrim <- sapply(hts_json,function(x) unlist(sapply(x[4],"[[","Paired_end")[c("PE_adapterTrim"),]))
+AdaptTotalBpTrim <- sapply(hts_json,function(x) unlist(sapply(x[4],"[[","Paired_end")[c("PE_adapterBpTrim"),]))
 
 ## Q windowtrim
-QwinTotalReadsIn <- sapply(hts_json,function(x) sapply(x[6], "[[","totalFragmentsInput"))
-QwinTotalR1LT <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("R1_leftTrim"),]))
-QwinTotalR1RT <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("R1_rightTrim"),]))
-QwinTotalR2LT <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("R2_leftTrim"),]))
-QwinTotalR2RT <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("R2_rightTrim"),]))
-QwinTotalDiscard <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("PE_discarded"),]))
+QwinTotalReadsIn <- sapply(hts_json,function(x) sapply(x[5], "[[","totalFragmentsInput"))
+QwinTotalR1LT <- sapply(hts_json,function(x) unlist(sapply(x[5],"[[","Paired_end")[c("R1_leftTrim"),]))
+QwinTotalR1RT <- sapply(hts_json,function(x) unlist(sapply(x[5],"[[","Paired_end")[c("R1_rightTrim"),]))
+QwinTotalR2LT <- sapply(hts_json,function(x) unlist(sapply(x[5],"[[","Paired_end")[c("R2_leftTrim"),]))
+QwinTotalR2RT <- sapply(hts_json,function(x) unlist(sapply(x[5],"[[","Paired_end")[c("R2_rightTrim"),]))
+QwinTotalDiscard <- sapply(hts_json,function(x) unlist(sapply(x[5],"[[","Paired_end")[c("PE_discarded"),]))
 
 ## N trim
-NwinTotalReadsIn <- sapply(hts_json,function(x) sapply(x[7], "[[","totalFragmentsInput"))
-NwinTotalR1LT <- sapply(hts_json,function(x) unlist(sapply(x[7],"[[","Paired_end")[c("R1_leftTrim"),]))
-NwinTotalR1RT <- sapply(hts_json,function(x) unlist(sapply(x[7],"[[","Paired_end")[c("R1_rightTrim"),]))
-NwinTotalR2LT <- sapply(hts_json,function(x) unlist(sapply(x[7],"[[","Paired_end")[c("R2_leftTrim"),]))
-NwinTotalR2RT <- sapply(hts_json,function(x) unlist(sapply(x[7],"[[","Paired_end")[c("R2_rightTrim"),]))
-NwinTotalDiscard <- sapply(hts_json,function(x) unlist(sapply(x[7],"[[","Paired_end")[c("PE_discarded"),]))
+NwinTotalReadsIn <- sapply(hts_json,function(x) sapply(x[6], "[[","totalFragmentsInput"))
+NwinTotalR1LT <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("R1_leftTrim"),]))
+NwinTotalR1RT <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("R1_rightTrim"),]))
+NwinTotalR2LT <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("R2_leftTrim"),]))
+NwinTotalR2RT <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("R2_rightTrim"),]))
+NwinTotalDiscard <- sapply(hts_json,function(x) unlist(sapply(x[6],"[[","Paired_end")[c("PE_discarded"),]))
 
 ## CutTrim
-CutTrimTotalReadsIn <- sapply(hts_json,function(x) sapply(x[8], "[[","totalFragmentsInput"))
-CutTrimTotalDiscard <- sapply(hts_json,function(x) unlist(sapply(x[8],"[[","Paired_end")[c("PE_discarded"),]))
+CutTrimTotalReadsIn <- sapply(hts_json,function(x) sapply(x[7], "[[","totalFragmentsInput"))
+CutTrimTotalDiscard <- sapply(hts_json,function(x) unlist(sapply(x[7],"[[","Paired_end")[c("PE_discarded"),]))
 
 
 ## Post-Stats
-stats2TotalReadsIn <- sapply(hts_json,function(x) sapply(x[9], "[[","totalFragmentsInput"))
-stats2TotalReadsCG <- sapply(hts_json,function(x) sum(unlist(sapply(x[9],"[[","Base_composition")[c("C","G"),])))
-stats2TotalReadsN <- sapply(hts_json,function(x) unlist(sapply(x[9],"[[","Base_composition")[c("N"),]))
-stats2TotalReadsR1_BpLen <- sapply(hts_json,function(x) unlist(sapply(x[9],"[[","Paired_end")[c("R1_bpLen"),]))
-stats2TotalReadsR1_BQ30 <- sapply(hts_json,function(x) unlist(sapply(x[9],"[[","Paired_end")[c("R1_bQ30"),]))
-stats2TotalReadsR2_BpLen <- sapply(hts_json,function(x) unlist(sapply(x[9],"[[","Paired_end")[c("R2_bpLen"),]))
-stats2TotalReadsR2_BQ30 <- sapply(hts_json,function(x) unlist(sapply(x[9],"[[","Paired_end")[c("R2_bQ30"),]))
+stats2TotalReadsIn <- sapply(hts_json,function(x) sapply(x[8], "[[","totalFragmentsInput"))
+stats2TotalReadsCG <- sapply(hts_json,function(x) sum(unlist(sapply(x[8],"[[","Base_composition")[c("C","G"),])))
+stats2TotalReadsN <- sapply(hts_json,function(x) unlist(sapply(x[8],"[[","Base_composition")[c("N"),]))
+stats2TotalReadsR1_BpLen <- sapply(hts_json,function(x) unlist(sapply(x[8],"[[","Paired_end")[c("R1_bpLen"),]))
+stats2TotalReadsR1_BQ30 <- sapply(hts_json,function(x) unlist(sapply(x[8],"[[","Paired_end")[c("R1_bQ30"),]))
+stats2TotalReadsR2_BpLen <- sapply(hts_json,function(x) unlist(sapply(x[8],"[[","Paired_end")[c("R2_bpLen"),]))
+stats2TotalReadsR2_BQ30 <- sapply(hts_json,function(x) unlist(sapply(x[8],"[[","Paired_end")[c("R2_bQ30"),]))
 
 
 
@@ -106,9 +99,6 @@ LongTable <- data.frame(
     SuperDeduper_Ignored = SdTotalReadsIgnored,
     SuperDeduper_Duplicate = SdTotalReadsDuplicate,
     SuperDeduper_Percent_Duplicate = SdTotalReadsDuplicate/SdTotalReadsIn*100,
-#    rRNA_In = seqScr2TotalReadsIn,
-#    rRNA_Identified = seqScr2TotalReadsHits,
-#    rRNA_Percent_Identified = seqScr2TotalReadsHits/seqScr2TotalReadsIn*100,
     AdapterTrimmed_IN = AdaptTotalReadsIn,
     AdapterTrimmed_Reads = AdaptTotalAdaptTrim,
     AdapterTrimmed_Percent_Reads = AdaptTotalAdaptTrim/AdaptTotalReadsIn*100,

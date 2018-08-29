@@ -56,11 +56,80 @@ Can be downloaded from [here](https://github.com/ibest/HTStream). Fast C++ imple
 * hts_QWindowTrim - 5' and/or 3' prime quality score trimming using windows
 * hts_Stats - compute read stats
 
+## Data Setup
+
+Let's set up a project directory for the week, and talk a bit about project philosophy..
+
+**1\.** First, create a directory for your user and the example project in the workshop directory:
+
+    cd
+    mkdir -p /share/workshop/$USER/variant_example
+
+---
+
+**2a\.** Next, go into that directory, create a raw data directory (we are going to all this 00-RawData) and cd into that directory. Lets then create a symbolic link to a directory that contains the raw data.
+
+    cd /share/workshop/$USER/variant_example
+    mkdir 00-RawData
+    cd 00-RawData/
+    ln -s /share/biocore/workshops/Variant-Analysis-Workshop/00-RawData/* .
+
+This directory now contains a folder for each sample and the original fastq files for each sample are in the sample folder.
+
+**2b\.** lets create a sample sheet for the project, store sample names in a file called samples.txt
+
+    ls > ../samples.txt
+    cat
+
+---
+
+**3\.** Now, take a look at the raw data directory.
+
+    ls
+
+---
+
+**4\.** You will see a list of directories and some other files. Take a look at all the files in all of the directories:
+
+    ls *
+
+---
+
+**5\.** Pick a directory and go into it. View the contents of the files using the 'less' command, when gzipped used 'zless' (which is just the 'less' command for gzipped files):
+
+    cd A8100/
+    less A8100.chr18.R1.fastq
+
+Make sure you can identify which lines correspond to a single read and which lines are the header, sequence, and quality values. Press 'q' to exit this screen. Then, let's figure out the number of reads in this file. A simple way to do that is to count the number of lines and divide by 4 (because the record of each read uses 4 lines). In order to do this use cat to output the uncompressed file and pipe that to "wc" to count the number of lines:
+
+    cat A8100.chr18.R1.fastq | wc -l
+
+Divide this number by 4 and you have the number of reads in this file. One more thing to try is to figure out the length of the reads without counting each nucleotide. First get the first 4 lines of the file (i.e. the first record):
+
+    cat A8100.chr18.R1.fastq  | head -4
+
+Note the header lines (1st and 3rd line) and sequence and quality lines (2nd and 4th) in each 4-line fastq block. Then, copy and paste the DNA sequence line into the following command (replace [sequence] with the line):
+
+    echo -n [sequence] | wc -c
+
+This will give you the length of the read. See if you can figure out how this command works.
+
+---
+
+**6\.** Now go back to your 'variant_example' directory and create another directory called '01-HTS_Preproc':
+
+    cd /share/workshop/$USER/variant_example
+    mkdir 01-HTS_Preproc
+
+The results of our preprocessing steps will be put into the 01-HTS_Preproc directory. The next step after that will go into a "02-..." directory, etc. You can collect scripts that perform each step, and notes and metadata relevant for each step, in the directory for that step. This way anyone looking to replicate your analysis has limited places to search for the commands you used. In addition, you may want to change the permissions on your original 00-RawData directory to "read only", so that you can never corrupt your raw data. (We won't worry about this here, because we've linked in sample folders).
+
+## Preprocessing our Raw data
+
 **1\.** Let's run the first step of our HTStream preprocessing pipeline, which is always to gather basic stats on the read files. For now, we're only going to run one sample through the pipeline.
 
 **1a\.** So let's first take a small subsample of reads, just so our trial run through the pipeline goes really quickly.
 
-    cd variant_example
+    cd /share/workshop/$USER/variant_example
     mkdir HTS_testing
     cd HTS_testing
     cat ../00-RawData/A8100/A8100.chr18.R1.fastq | head -400000 | gzip > A8100.subset.chr18.R1.fastq.gz
@@ -73,7 +142,7 @@ So we cat (uncompress and send to screen), pipe to head (param -400000) then pip
 
 **1b\.** Now we'll run our first preprocessing step ... hts_Stats, first loading the module and then looking at help.
 
-    cd variant_example/HTS_testing
+    cd /share/workshop/$USER/variant_example/HTS_testing
     module load htstream/0.3.1
     hts_Stats --help
 
@@ -135,15 +204,15 @@ Lets take a look at the output of stats
     ls -lah
 
 ```
-msettles@ganesh: HTS_testing$ls -lah
-total 20M
-drwxrwxr-x 2 msettles msettles    7 Jun 18 15:07 .
-drwxrwxr-x 4 msettles msettles    7 Jun 18 15:04 ..
--rw-rw-r-- 1 msettles msettles  658 Jun 18 15:07 C61.stats.log
--rw-rw-r-- 1 msettles msettles 4.6M Jun 18 15:04 C61.subset_R1.fastq.gz
--rw-rw-r-- 1 msettles msettles 5.0M Jun 18 15:05 C61.subset_R2.fastq.gz
--rw-rw-r-- 1 msettles msettles 4.6M Jun 18 15:07 C61.stats_R1.fastq.gz
--rw-rw-r-- 1 msettles msettles 5.0M Jun 18 15:07 C61.stats_R2.fastq.gz
+msettles@tadpole:/share/workshop/msettles/variant_example/HTS_testing$     ls -lah
+total 33M
+drwxrwsr-x 2 msettles workshop    7 Aug 28 22:14 .
+drwxrwsr-x 5 msettles workshop    6 Aug 28 22:14 ..
+-rw-rw-r-- 1 msettles workshop  658 Aug 28 22:14 A8100.stats.log
+-rw-rw-r-- 1 msettles workshop 8.2M Aug 28 22:14 A8100.stats_R1.fastq.gz
+-rw-rw-r-- 1 msettles workshop 8.2M Aug 28 22:14 A8100.stats_R2.fastq.gz
+-rw-rw-r-- 1 msettles workshop 8.2M Aug 28 22:14 A8100.subset.chr18.R1.fastq.gz
+-rw-rw-r-- 1 msettles workshop 8.2M Aug 28 22:14 A8100.subset.chr18.R2.fastq.gz
 ```
 
 *Which files were generated from hts\_Stats?*
@@ -153,18 +222,18 @@ drwxrwxr-x 4 msettles msettles    7 Jun 18 15:04 ..
 The logs generated by htstream are in [json](https://en.wikipedia.org/wiki/JSON) format, like a database format but meant to be readable.
 
 ```
-{ "hts_Stats_38989": {
+{ "hts_Stats_37162": {
     "Notes": "",
     "totalFragmentsInput": 100000,
     "totalFragmentsOutput": 100000,
-    "R1_readlength_histogram": [ [100,100000] ],
-    "R2_readlength_histogram": [ [100,100000] ],
+    "R1_readlength_histogram": [ [101,100000] ],
+    "R2_readlength_histogram": [ [101,100000] ],
     "Base_composition": {
-        "A": 5382561,
-        "C": 4628992,
-        "G": 4586654,
-        "T": 5397116,
-        "N": 4677
+        "A": 6194951,
+        "C": 3901774,
+        "G": 3895743,
+        "T": 6198781,
+        "N": 8751
     },
     "Single_end": {
         "SE_in": 0,
@@ -175,22 +244,21 @@ The logs generated by htstream are in [json](https://en.wikipedia.org/wiki/JSON)
     "Paired_end": {
         "PE_in": 100000,
         "PE_out": 100000,
-        "R1_bpLen": 10000000,
-        "R1_bQ30": 9763638,
-        "R2_bpLen": 10000000,
-        "R2_bQ30": 9561481
+        "R1_bpLen": 10100000,
+        "R1_bQ30": 9441209,
+        "R2_bpLen": 10100000,
+        "R2_bQ30": 9062013
     }
   }
-}
-```
+}```
 
 ---
 
-**2.** Next we are going to screen from ribosomal RNA (rRNA). IF for some reason you wanted to do that **EXAMPLE OF SCREEN ONLY**
+**2.** Next we are going to screen from ribosomal RNA (rRNA). IF for some reason you wanted to do that with DNA **EXAMPLE OF SCREEN ONLY**
 
 Ribosomal RNA makes up 90% or more of a typical _total RNA_ sample. Most library prep methods attempt to reduce the rRNA representation in a sample, oligoDt binds to polyA tails to enrich a sample for mRNA, where Ribo-depleton binds rRNA sequences to deplete the sample of rRNA. Neither technique is 100% efficient and so knowing the relative proportion of rRNA in each sample can be helpful.
 
-Can screen for rRNA in our sample to determine rRNA efficiency.
+Can screen for rRNA in our sample to determine rRNA content.
 
 **2a.** Before we do so we need to find sequences of ribosomal RNA to screen against.
 
@@ -226,7 +294,7 @@ Save this file to your computer, and rename it to 'rrna.fasta'.
 
 Now, make a directory in your "variant_example" directory called "ref":
 
-    cd variant_example
+    cd /share/workshop/$USER/variant_example
     mkdir ref
 
 Upload your rrna.fasta file **to the 'ref' directory** on the cluster using either **scp** or FileZilla. Or if you feel like cheating, paste the contents of rrna.fa using nano into a file named variant_example/ref/rrna.fasta
@@ -239,7 +307,7 @@ Upload your rrna.fasta file **to the 'ref' directory** on the cluster using eith
 
 First, view the help documentation for hts_SeqScreener
 
-    cd variant_example/HTS_testing
+    cd /share/workshop/$USER/variant_example/HTS_testing
     hts_SeqScreener -h
 
 ```
@@ -313,7 +381,7 @@ Please report any issues, request for enhancement, or comments to <https://githu
 
     hts_SeqScreener -1 A8100.subset.chr18.R1.fastq.gz \
                     -2 A8100.subset.chr18.R2.fastq.gz \
-                    -s ../ref/rrna.fasta -r -L A8100.rrna.log -A -f -g -p A8100.rrna
+                    -s ../ref/rrna.fasta -r -L A8100.rrna.log -f -g -p A8100.rrna
 
 *Which files were generated from hts\_SeqScreener?*
 
@@ -337,7 +405,7 @@ Paired end reads are 6 columns:
 
 So lets first run hts_Stats and then hts_SeqScreener in a streamed fashion.
 
-    cd variant_example/HTS_testing
+    cd /share/workshop/$USER/variant_example/HTS_testing
 
     hts_Stats -1 A8100.subset.chr18.R1.fastq.gz \
               -2 A8100.subset.chr18.R2.fastq.gz \
@@ -376,7 +444,7 @@ For RNAseq and variant analysis (any mapping based technique) it is not critical
 
 **4b.** Removing PCR duplicates with hts_SuperDeduper.
 
-Removing PCR duplicates can be **controversial** for RNAseq, but I'm in favor of it. It tells you alot about the original complexity of each sample and potential impact of sequencing depth.
+Removing duplicates is standard practice in variant analysis. Removing PCR duplicates can be **controversial** for RNAseq, but I'm in favor of it. It tells you alot about the original complexity of each sample and potential impact of sequencing depth.
 
 **However, I would never do PCR duplicate removal on single-end reads**
 <img src="preproc_figures/SD_eval.png" alt="SD_eval" width="500px"/>
@@ -433,7 +501,6 @@ Comparing star mapping with raw and preprocessed reads
 <img src="preproc_figures/final.png" alt="final" width="500px"/>
 
 
-
 **5.** Lets put it all together
 
     hts_Stats -O -L A8100_htsStats.log -1 A8100.subset.chr18.R1.fastq.gz -2 A8100.subset.chr18.R2.fastq.gz | \
@@ -462,11 +529,12 @@ Note the patterns:
 
 *Anything else interesting?*
 
+*Spend some time playing with applications and arguments, change things up!*
 ---
 
 **6\.** We can now run the preprocessing routine across all samples on the real data using a SLURM script, [hts_preproc.slurm](./hts_preproc.slurm), that we should take a look at now.
 
-    cd variant_example  # We'll run this from the main directory
+    cd /share/workshop/$USER/variant_example  # We'll run this from the main directory
     cp /share/biocore/workshops/Variant-Analysis-Workshop/hts_preproc.slurm .
     cat hts_preproc.slurm
     mkdir slurmout
@@ -475,9 +543,9 @@ After looking at the script, lets make a slurmout directory for the output to go
 
     sbatch hts_preproc.slurm  # moment of truth!
 
-We can watch the progress of our task array using the 'squeue' command. Takes about 30 minutes to process each sample.
+We can watch the progress of our task array using the 'squeue' command. Takes less than 10 minutes to process each sample.
 
-    squeue -u class42  # use your actual username, no brackets
+    squeue -u $USER  # use your actual username, no brackets
 
 ---
 
@@ -496,7 +564,7 @@ PCA/MDS plots of the preprocessing summary are a great way to look for technical
 
 Lets first check all the "htstream_%\*.out" and "htstream_%\*.err" files:
 
-    cd variant_example
+    cd /share/workshop/$USER/variant_example
     cat slurmout/htstream_*.out
 
 Look through the output and make sure you don't see any errors. Now do the same for the err files:
@@ -519,14 +587,14 @@ If, for some reason, your jobs did not finish or something else went wrong, plea
 
 **9.** Let's take a look at the differences between the input and output files. First look at the input file:
 
-    cd variant_example
-    zless 00-RawData/I894/I894_S90_L006_R1_001.fastq.gz
+    cd /share/workshop/$USER/variant_example
+    less 00-RawData/A8100/A8100.chr18.R1.fastq
 
 Let's search for the adapter sequence. Type '/' (a forward slash), and then type **AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC** (the first part of the forward adapter). Press Enter. This will search for the sequence in the file and highlight each time it is found. You can now type "n" to cycle through the places where it is found. When you are done, type "q" to exit.
 
-Now look at the output file:
+Now look at the output file, zless this time since its gzipped:
 
-    zless 01-HTS_Preproc/I894/I894_R1.fastq.gz
+    zless 01-HTS_Preproc/A8100/A8100_R1.fastq.gz
 
 If you scroll through the data (using the spacebar), you will see that some of the sequences have been trimmed. Now, try searching for **AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC** again. You shouldn't find it (adapters were trimmed remember). You may need to use Control-C to get out of the search and then "q" to exit the 'less' screen.
 
@@ -536,9 +604,10 @@ If you scroll through the data (using the spacebar), you will see that some of t
 
 I've created a small R script to read in each json file, pull out some relevant stats and write out a table for all samples.
 
-    cd variant_example  # We'll run this from the main directory
+    cd /share/workshop/$USER/variant_example  # We'll run this from the main directory
     cp /share/biocore/workshops/Variant-Analysis-Workshop/summarize_stats.R .
 
+    module load R/3.5.0
     R CMD BATCH summarize_stats.R
     cat summary_hts.txt
 

@@ -571,7 +571,7 @@ Look through the output and make sure you don't see any errors. Now do the same 
 
     cat slurmout/htstream_*.err
 
-Also, check the output files. First check the number of forward and reverse output files (should be 24 each):
+Also, check the output files. First check the number of forward and reverse output files (should be 5 each):
 
     cd 01-HTS_Preproc
     ls */*R1* | wc -l

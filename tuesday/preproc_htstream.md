@@ -535,7 +535,7 @@ Note the patterns:
 **6\.** We can now run the preprocessing routine across all samples on the real data using a SLURM script, [hts_preproc.slurm](./hts_preproc.slurm), that we should take a look at now.
 
     cd /share/workshop/$USER/variant_example  # We'll run this from the main directory
-    cp /share/biocore/workshops/Variant-Analysis-Workshop/hts_preproc.slurm .
+    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2018-August-Variant-Analysis-Workshop/master/tuesday/hts_preproc.slurm
     cat hts_preproc.slurm
     mkdir slurmout
 
@@ -602,10 +602,10 @@ If you scroll through the data (using the spacebar), you will see that some of t
 
 **10.** QA/QC Summary table of the json files.
 
-I've created a small R script to read in each json file, pull out some relevant stats and write out a table for all samples.
+I've created a small R script to read in each json file, pull out some relevant stats and write out a table for all samples, we will use the app 'wget' to copy the script from the internet.
 
     cd /share/workshop/$USER/variant_example  # We'll run this from the main directory
-    cp /share/biocore/workshops/Variant-Analysis-Workshop/summarize_stats.R .
+    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2018-August-Variant-Analysis-Workshop/master/tuesday/summarize_stats.R
 
     module load R/3.5.0
     R CMD BATCH summarize_stats.R

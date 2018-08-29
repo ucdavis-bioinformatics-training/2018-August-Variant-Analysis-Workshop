@@ -549,7 +549,7 @@ We can watch the progress of our task array using the 'squeue' command. Takes le
 
 ---
 
-**7.** Preprocessing statistics as QA/QC.
+## Preprocessing statistics as QA/QC.
 
 Beyond generating "better" data for downstream analysis, cleaning statistics also give you an idea as to the original quality and complexity of the sample, library generation, and sequencing quality.
 
@@ -560,7 +560,7 @@ I’ve found it best to perform QA/QC on both the run as a whole (poor samples c
 Reports such as Basespace for Illumina, are great ways to evaluate the run as a whole, the sequencing provider usually does this for you.
 PCA/MDS plots of the preprocessing summary are a great way to look for technical bias across your experiment. Poor quality samples often appear as outliers on the MDS plot and can ethically be removed due to identified technical issues.
 
-**8\.** Let's make sure that all jobs completed successfully.
+**1\.** Let's make sure that all jobs completed successfully.
 
 Lets first check all the "htstream_%\*.out" and "htstream_%\*.err" files:
 
@@ -585,7 +585,7 @@ If, for some reason, your jobs did not finish or something else went wrong, plea
 
 ---
 
-**9.** Let's take a look at the differences between the input and output files. First look at the input file:
+**2.** Let's take a look at the differences between the input and output files. First look at the input file:
 
     cd /share/workshop/$USER/variant_example
     less 00-RawData/A8100/A8100.chr18.R1.fastq
@@ -600,7 +600,7 @@ If you scroll through the data (using the spacebar), you will see that some of t
 
 ---
 
-**10.** QA/QC Summary table of the json files.
+**3.** QA/QC Summary table of the json files.
 
 I've created a small R script to read in each json file, pull out some relevant stats and write out a table for all samples, we will use the app 'wget' to copy the script from the internet.
 
@@ -617,7 +617,7 @@ Lets move this file to our computer, using scp or winSCP, or copy/paste from cat
 
 *Anything else worth discussing?*
 
-**11.** Scripts
+**4.** Scripts
 
 slurm script for preprocessing using slurm task array and htstream
 

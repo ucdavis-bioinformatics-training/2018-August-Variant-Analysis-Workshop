@@ -47,7 +47,7 @@ barplot(variants, col="red", main="Different types of variants", xlab="Type of v
 ## 3. Pie and historgram 
 Now do the same thing but for the snpeff annotations, use the key search phrases in grep "prime_UTR", "inframe_insertion", "frameshift", "intergenic", "intron", "missense", "splice_", "stop_lost", "synonymous", "_gene_variant" [combined upstream/downstream gene variants].
 
-# circos plots 
+# Circos plots 
 ## 1. Now, we are going to use a package "RCircos" to generate circos plot.
 First, install RCircos if haven't done it already 
 
@@ -98,15 +98,15 @@ RCircos.Chromosome.Ideogram.Plot()
 # plot gene labels, there are limits setup by default for the number of genes that can be plotted for each chromosome based on the size of the chromosomes. The parameter can be changed if necessary. However, plotting too many genes will have the risk of having gene symbols overlapping one another.
 
 # First download the gene annotation files 'ensGene.txt' and 'ensemblToGeneName.txt' from UCSC http://hgdownload.cse.ucsc.edu/goldenPath/equCab2/database/ 
-genes <- read.table(file="files/ensGene.txt", sep="\t", header=F, stringsAsFactors=F)
-anno <- read.table(file="files/ensemblToGeneName.txt", sep="\t", header=F, stringsAsFactors=F)
+genes <- read.table(file="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2018-August-Variant-Analysis-Workshop/master/friday/Variant-Analysis-by-R/files/ensGene.txt", sep="\t", header=F, stringsAsFactors=F)
+anno <- read.table(file="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2018-August-Variant-Analysis-Workshop/master/friday/Variant-Analysis-by-R/files/ensemblToGeneName.txt", sep="\t", header=F, stringsAsFactors=F)
 idx <- match(genes$V2, anno$V1)
 genes$anno <- unlist(lapply(1:dim(genes)[1], function(x){if (is.na(idx[x]) == "TRUE") {genes$V2[x]} else {anno$V2[idx[x]]}}))
 
 # write out the gene label anntation file
 write.table(genes[,c("V3","V5","V6","anno")], file="gene.label", sep="\t", row.names=F, col.names=F, quote=F)
 
-gene.label.data <- read.table(file="gene.label", sep="\t", header=F)
+gene.label.data <- read.table(file="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2018-August-Variant-Analysis-Workshop/master/friday/Variant-Analysis-by-R/files/gene.label", sep="\t", header=F)
 
 # The format of the gene information:
 
@@ -137,9 +137,38 @@ name.col <- 4
 side <- "in"
 track.num <- 1
 RCircos.Gene.Connector.Plot(gene.list, track.num, side)
+```
 
+```
+## Not all labels will be plotted.
+```
+
+```
+## Type RCircos.Get.Gene.Name.Plot.Parameters()
+```
+
+```
+## to see the number of labels for each chromosome.
+```
+
+```r
 track.num <- 2
 RCircos.Gene.Name.Plot(gene.list, name.col, track.num, side)
+```
+
+```
+## Not all labels will be plotted.
+```
+
+```
+## Type RCircos.Get.Gene.Name.Plot.Parameters()
+```
+
+```
+## to see the number of labels for each chromosome.
+```
+
+```r
 # It's possible that some genes are not plotted because of the limit of plotting for each chromosome.
 
 # check plot parameters, if needed, they may be changed.
@@ -213,13 +242,13 @@ head(gene.expr)
 ```
 
 ```
-##       chromosome     start      stop gene.name CNV      logFC
-## 27190       chr9  59667297  59667556       7SK   2 -2.6990231
-## 23964       chr6  74892448  74898799     STAC3   1 -1.5708902
-## 1312        chr1 116826189 116831586      ISL2   2  1.0879998
-## 5112       chr11  59984438  60039749    TOM1L2   6 -0.9292161
-## 18271      chr28  45983736  45985446     ODF3B   4 -1.7645451
-## 5443       chr12  18430569  18431490     OR9Q2   2 -1.9066786
+##       chromosome    start     stop gene.name CNV      logFC
+## 5103       chr11 59677601 59680502     MIEF2   5 -0.2812333
+## 15174      chr22 44868453 44877281   APCDD1L   5  0.8707372
+## 12030       chr2 25279986 25311688   SNRNP40   4 -1.3797330
+## 4129       chr11 18856119 18881069      GJC1   5  1.1303237
+## 24250       chr7  5802631  5841317    PIWIL4   3 -1.1106365
+## 22246       chr5 46988588 47009169    OTUD7B   5 -2.9199399
 ```
 
 ```r

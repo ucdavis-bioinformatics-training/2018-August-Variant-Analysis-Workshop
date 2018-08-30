@@ -1,3 +1,9 @@
+---
+output:
+  html_document:
+    keep_md: true
+  word_document: default
+---
 R for Biologist - An Introduction to R (Beginner)
 ========================================================
 
@@ -1074,10 +1080,6 @@ Topic 3. Basic statistics in R
 ====================================================
 
 
-```
-## Warning: package 'knitr' was built under R version 3.4.1
-```
-
              Description                 R_function 
 --------------------------------------  ------------
                  Mean                      mean()   
@@ -1213,25 +1215,25 @@ lapply(1:dim(data)[1], function(x){sum(data[x,])})
 
 ```
 ## [[1]]
-## [1] 3.08365
+## [1] -3.611939
 ## 
 ## [[2]]
-## [1] 0.6096668
+## [1] -0.534563
 ## 
 ## [[3]]
-## [1] 4.569502
+## [1] -2.730897
 ## 
 ## [[4]]
-## [1] 3.993351
+## [1] 4.308815
 ## 
 ## [[5]]
-## [1] 1.978054
+## [1] -5.689091
 ## 
 ## [[6]]
-## [1] -1.357851
+## [1] -4.148624
 ## 
 ## [[7]]
-## [1] -1.154092
+## [1] 4.598052
 ```
 
 ```r
@@ -1239,8 +1241,7 @@ apply(data, MARGIN=1, sum)
 ```
 
 ```
-## [1]  3.0836505  0.6096668  4.5695023  3.9933514  1.9780545 -1.3578508
-## [7] -1.1540921
+## [1] -3.611939 -0.534563 -2.730897  4.308815 -5.689091 -4.148624  4.598052
 ```
 
 ```r
@@ -1251,29 +1252,35 @@ lapply(1:dim(data)[1], function(x){log10(sum(data[x,]))})
 ## Warning in FUN(X[[i]], ...): NaNs produced
 
 ## Warning in FUN(X[[i]], ...): NaNs produced
+
+## Warning in FUN(X[[i]], ...): NaNs produced
+
+## Warning in FUN(X[[i]], ...): NaNs produced
+
+## Warning in FUN(X[[i]], ...): NaNs produced
 ```
 
 ```
 ## [[1]]
-## [1] 0.4890651
+## [1] NaN
 ## 
 ## [[2]]
-## [1] -0.2149075
+## [1] NaN
 ## 
 ## [[3]]
-## [1] 0.6598689
+## [1] NaN
 ## 
 ## [[4]]
-## [1] 0.6013375
+## [1] 0.6343579
 ## 
 ## [[5]]
-## [1] 0.2962383
+## [1] NaN
 ## 
 ## [[6]]
 ## [1] NaN
 ## 
 ## [[7]]
-## [1] NaN
+## [1] 0.6625739
 ```
 
 # The function sapply() works like function lapply(), but tries to simplify the output to the most elementary data structure that is possible. As a matter of fact, sapply() is a "wrapper" function for lapply(). By default, it returns a vector.
@@ -1290,11 +1297,16 @@ sapply(1:dim(data)[1], function(x){log10(sum(data[x,]))})
 ## Warning in FUN(X[[i]], ...): NaNs produced
 
 ## Warning in FUN(X[[i]], ...): NaNs produced
+
+## Warning in FUN(X[[i]], ...): NaNs produced
+
+## Warning in FUN(X[[i]], ...): NaNs produced
+
+## Warning in FUN(X[[i]], ...): NaNs produced
 ```
 
 ```
-## [1]  0.4890651 -0.2149075  0.6598689  0.6013375  0.2962383        NaN
-## [7]        NaN
+## [1]       NaN       NaN       NaN 0.6343579       NaN       NaN 0.6625739
 ```
 
 # If the "simplify" parameter is turned off, sapply() will produced exactly the same results as lapply(), in the form of a list. By default, "simplify" is turned on.
@@ -1307,29 +1319,35 @@ sapply(1:dim(data)[1], function(x){log10(sum(data[x,]))}, simplify=FALSE)
 ## Warning in FUN(X[[i]], ...): NaNs produced
 
 ## Warning in FUN(X[[i]], ...): NaNs produced
+
+## Warning in FUN(X[[i]], ...): NaNs produced
+
+## Warning in FUN(X[[i]], ...): NaNs produced
+
+## Warning in FUN(X[[i]], ...): NaNs produced
 ```
 
 ```
 ## [[1]]
-## [1] 0.4890651
+## [1] NaN
 ## 
 ## [[2]]
-## [1] -0.2149075
+## [1] NaN
 ## 
 ## [[3]]
-## [1] 0.6598689
+## [1] NaN
 ## 
 ## [[4]]
-## [1] 0.6013375
+## [1] 0.6343579
 ## 
 ## [[5]]
-## [1] 0.2962383
+## [1] NaN
 ## 
 ## [[6]]
 ## [1] NaN
 ## 
 ## [[7]]
-## [1] NaN
+## [1] 0.6625739
 ```
 
 
@@ -1344,7 +1362,7 @@ source("http://bioconductor.org/biocLite.R")
 ```
 
 ```
-## Bioconductor version 3.5 (BiocInstaller 1.26.0), ?biocLite for help
+## Bioconductor version 3.7 (BiocInstaller 1.30.0), ?biocLite for help
 ```
 
 ```r
@@ -1355,6 +1373,10 @@ source("http://bioconductor.org/biocLite.R")
 #biocLite(c("IdeoViz", "devtools"))
 ```
 
+If it's the first time you invoke the above "source" command, you should see a very similar screen as in the following picture:
+![source biocLite command showcase](./sourcebiocLite.png)
+
+
 
 ```r
 #install.packages("ggplot2", repos="http://cran.us.r-project.org")
@@ -1364,18 +1386,11 @@ Install from source of github.
 
 ```r
 library(devtools)
-```
-
-```
-## Warning: package 'devtools' was built under R version 3.4.1
-```
-
-```r
 install_github("stephenturner/qqman")
 ```
 
 ```
-## Skipping install of 'qqman' from a github remote, the SHA1 (d6aa53a0) has not changed since last install.
+## Skipping install of 'qqman' from a github remote, the SHA1 (0c3aa54e) has not changed since last install.
 ##   Use `force = TRUE` to force installation
 ```
 

@@ -56,7 +56,7 @@ Save the file and Exit nano.
 
 Now, link to the reference file, but call it "sequences.fa":
 
-    ln -s ~/variant_example/ref/chr18.fa sequences.fa
+    ln -s /share/workshop/<your username>/variant_example/ref/chr18.fa sequences.fa
 
 And get the annotation file:
 

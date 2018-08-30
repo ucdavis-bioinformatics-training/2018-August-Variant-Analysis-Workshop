@@ -614,6 +614,10 @@ source("http://bioconductor.org/biocLite.R")
 #biocLite(c("IdeoViz", "devtools"))
 ```
 
+If it's the first time you invoke the above "source" command, you should see a very similar screen as in the following picture:
+![source biocLite command showcase](./sourcebiocLite.png)
+
+
 ```{r}
 #install.packages("ggplot2", repos="http://cran.us.r-project.org")
 ```

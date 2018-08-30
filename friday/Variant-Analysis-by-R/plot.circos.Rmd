@@ -76,8 +76,8 @@ RCircos.Chromosome.Ideogram.Plot()
 # plot gene labels, there are limits setup by default for the number of genes that can be plotted for each chromosome based on the size of the chromosomes. The parameter can be changed if necessary. However, plotting too many genes will have the risk of having gene symbols overlapping one another.
 
 # First download the gene annotation files 'ensGene.txt' and 'ensemblToGeneName.txt' from UCSC http://hgdownload.cse.ucsc.edu/goldenPath/equCab2/database/ 
-genes <- read.table(file="ensGene.txt", sep="\t", header=F, stringsAsFactors=F)
-anno <- read.table(file="ensemblToGeneName.txt", sep="\t", header=F, stringsAsFactors=F)
+genes <- read.table(file="files/ensGene.txt", sep="\t", header=F, stringsAsFactors=F)
+anno <- read.table(file="files/ensemblToGeneName.txt", sep="\t", header=F, stringsAsFactors=F)
 idx <- match(genes$V2, anno$V1)
 genes$anno <- unlist(lapply(1:dim(genes)[1], function(x){if (is.na(idx[x]) == "TRUE") {genes$V2[x]} else {anno$V2[idx[x]]}}))
 

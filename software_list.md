@@ -2,8 +2,8 @@
 
 ### General
 
-# [SLURM](https://slurm.schedmd.com/)
-# [modules](http://modules.sourceforge.net/)
+* [SLURM](https://slurm.schedmd.com/)
+* [modules](http://modules.sourceforge.net/)
 
 ### Preprocessing
 
@@ -11,20 +11,20 @@
 
 ### Alignment
 
-# [BWA](https://github.com/lh3/bwa)
-# [SAMtools](http://www.htslib.org/)
+* [BWA](https://github.com/lh3/bwa)
+* [SAMtools](http://www.htslib.org/)
 
 ### Variant Calling
 
-# [Freebayes](https://github.com/ekg/freebayes)
-# [DELLY](https://github.com/dellytools/delly)
-# [Picard](https://broadinstitute.github.io/picard/)
-# [GATK](https://software.broadinstitute.org/gatk/)
+* [Freebayes](https://github.com/ekg/freebayes)
+* [DELLY](https://github.com/dellytools/delly)
+* [Picard](https://broadinstitute.github.io/picard/)
+* [GATK](https://software.broadinstitute.org/gatk/)
 
 ### Variant Effect Calling
 
-# [BEDtools](https://github.com/arq5x/bedtools2)
-# [snpEff](http://snpeff.sourceforge.net/)
+* [BEDtools](https://github.com/arq5x/bedtools2)
+* [snpEff](http://snpeff.sourceforge.net/)
 
 ### R and R Studio
 

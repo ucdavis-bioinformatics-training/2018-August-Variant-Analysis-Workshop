@@ -52,7 +52,7 @@ Friday
 
 * [Intro to R](friday/Intro2R.md)
 * [Advanced Sequencing and Wet Lab Topics, Lutz Froenicke](friday/VariantAnalysisBioinformaticsWorkshop_082017.pdf) (talk)
-* [Variant Analysis with R](friday/Variant-Analysis-by-R.md)
+* [Variant Analysis with R](friday/Variant-Analysis-by-R/plot.circos)
 * [GWAS/Cancer-Seq](friday/GWAS_Cancer.pdf)
 * [Closing thoughts](friday/Closing_Thoughts.pdf)
 

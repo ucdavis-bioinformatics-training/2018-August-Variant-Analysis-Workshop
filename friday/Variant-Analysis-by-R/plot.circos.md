@@ -48,6 +48,10 @@ barplot(variants, col="red", main="Different types of variants", xlab="Type of v
 Now do the same thing but for the snpeff annotations, use the key search phrases in grep "prime_UTR", "inframe_insertion", "frameshift", "intergenic", "intron", "missense", "splice_", "stop_lost", "synonymous", "_gene_variant" [combined upstream/downstream gene variants].
 
 # Circos plots 
+
+![What is a circos plot?](./rcircos.png)
+
+
 ## 1. Now, we are going to use a package "RCircos" to generate circos plot.
 First, install RCircos if haven't done it already 
 
@@ -140,15 +144,8 @@ RCircos.Gene.Connector.Plot(gene.list, track.num, side)
 ```
 
 ```
-## Not all labels will be plotted.
-```
-
-```
-## Type RCircos.Get.Gene.Name.Plot.Parameters()
-```
-
-```
-## to see the number of labels for each chromosome.
+## There is unsupported chromosome names in ideogram
+## and chromosomes are sorted in alphabetical order.
 ```
 
 ```r
@@ -157,15 +154,8 @@ RCircos.Gene.Name.Plot(gene.list, name.col, track.num, side)
 ```
 
 ```
-## Not all labels will be plotted.
-```
-
-```
-## Type RCircos.Get.Gene.Name.Plot.Parameters()
-```
-
-```
-## to see the number of labels for each chromosome.
+## There is unsupported chromosome names in ideogram
+## and chromosomes are sorted in alphabetical order.
 ```
 
 ```r
@@ -242,13 +232,13 @@ head(gene.expr)
 ```
 
 ```
-##       chromosome    start     stop gene.name CNV      logFC
-## 16140      chr24 36722578 36740611     OTUB2   5  1.6126392
-## 3385       chr10 39994348 40080436    ZNF292   3 -0.3206456
-## 5896       chr12 31773240 31773528       SCT   5  0.9547508
-## 25493       chr7 77606946 77665883      RIC3   5  2.6867583
-## 16411      chr25   909907   916111       CA9   6  1.8490665
-## 23269       chr6 34818257 34862319   CD163L1   1  0.4297812
+##       chromosome     start      stop gene.name CNV      logFC
+## 17806      chr28   7861299   8045131     PTPRQ   2 -1.8363523
+## 2350        chr1 183656393 183657423     MGAT2   3  2.7323136
+## 11608       chr2   1400343   1436278     MYSM1   1  1.8502918
+## 22042       chr5  41683609  41688935     TTC24   6  0.6990219
+## 13799      chr20  40903703  40935396     FOXP4   4 -2.8410517
+## 27468      chrUn   2034526   2037248    MRPL40   1 -1.7550689
 ```
 
 ```r

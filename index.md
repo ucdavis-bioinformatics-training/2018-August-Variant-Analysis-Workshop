@@ -3,7 +3,7 @@ title: Variant Analysis Workshop Home - Aug 27-31, 2018
 ---
 
 Cheat Sheets
-=======
+----------
 
 [Cheat Sheets](cheatSheetIndex.md)
 
@@ -52,6 +52,9 @@ Friday
 * [Variant Analysis with R](friday/Variant-Analysis-by-R/plot.circos)
 * [Closing thoughts](friday/Closing_Thoughts.pdf)
 
+
+List of Software
+----------
 
 [List of Software](software_list.md)
 

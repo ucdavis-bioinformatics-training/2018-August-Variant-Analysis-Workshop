@@ -42,6 +42,10 @@ barplot(variants, col="red", main="Different types of variants", xlab="Type of v
 Now do the same thing but for the snpeff annotations, use the key search phrases in grep "prime_UTR", "inframe_insertion", "frameshift", "intergenic", "intron", "missense", "splice_", "stop_lost", "synonymous", "_gene_variant" [combined upstream/downstream gene variants].
 
 # Circos plots 
+
+![What is a circos plot?](./rcircos.png)
+
+
 ## 1. Now, we are going to use a package "RCircos" to generate circos plot.
 First, install RCircos if haven't done it already 
 

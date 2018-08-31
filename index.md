@@ -16,7 +16,6 @@ Monday
 * [Intro to command-line](monday/command-line-intro) (hands-on)
 * [Advanced command-line](monday/advanced-command-line) (hands-on)
 * [Running jobs on the Cluster and using modules](monday/cluster) (hands-on)
-* [What is Bioinformatics?](additional_lectures/What_is_Bioinformatics.pdf) (talk)
 
 
 Tuesday
@@ -34,7 +33,6 @@ Wednesday
 * [Aligners](wednesday/Aligners.pdf) (talk)
 * [Aligning Data and IGV](wednesday/alignment) (hands-on)
 * [Files and Filetypes for Genomes/Annotation - sam/bam](tuesday/Filetypes.pdf) (talk)
-* [Genome Assembly and Annotation](wednesday/GenomeAssembly.pdf) (talk)
 * [Variant calling with Freebayes & Delly](wednesday/variant_calling) (hands-on)
 * [Files and Filetypes for Genomes/Annotation - vcf](tuesday/Filetypes.pdf) (talk)
 
@@ -51,10 +49,18 @@ Friday
 ----------
 
 * [Intro to R](friday/Intro2R.md)
-* [Advanced Sequencing and Wet Lab Topics, Lutz Froenicke](friday/VariantAnalysisBioinformaticsWorkshop_082017.pdf) (talk)
 * [Variant Analysis with R](friday/Variant-Analysis-by-R/plot.circos)
-* [GWAS/Cancer-Seq](friday/GWAS_Cancer.pdf)
 * [Closing thoughts](friday/Closing_Thoughts.pdf)
+
+
+[List of Software](software_list.md)
+
+
+Side Presentations/Slides
+-----------
+* [What is Bioinformatics?](additional_lectures/What_is_Bioinformatics.pdf) (talk)
+* [Genome Assembly and Annotation](additional_lectures/) (talk)
+* [Advanced Sequencing and Wet Lab Topics, Lutz Froenicke](additional_lectures/) (talk)
 
 Evaluation!
 -----------

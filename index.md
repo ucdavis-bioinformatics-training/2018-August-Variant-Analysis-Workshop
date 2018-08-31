@@ -62,7 +62,7 @@ List of Software
 Side Presentations/Slides
 -----------
 * [What is Bioinformatics?](additional_lectures/What_is_Bioinformatics.pdf) (talk)
-* [Genome Assembly and Annotation](additional_lectures/) (talk)
+* [Genome Assembly and Annotation](additional_lectures/GenomeAssembly.pdf) (talk)
 * [Advanced Sequencing and Wet Lab Topics, Lutz Froenicke](additional_lectures/) (talk)
 
 Evaluation!

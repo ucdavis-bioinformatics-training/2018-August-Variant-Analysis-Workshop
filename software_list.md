@@ -1,4 +1,4 @@
-## Software List
+## Software List used in this workshop
 
 ### General
 
@@ -26,7 +26,11 @@
 * [BEDtools](https://github.com/arq5x/bedtools2)
 * [snpEff](http://snpeff.sourceforge.net/)
 
-### R and R Studio
+### R, Studio, and R packages used
 
 * [R](https://www.r-project.org/)
 * [RStudio](https://www.rstudio.com/)
+* [IdeoViz Package](https://bioconductor.org/packages/release/bioc/html/IdeoViz.html)
+* [RCircos Package](https://cran.r-project.org/web/packages/RCircos/index.html)
+* [devtools Package](https://cran.r-project.org/web/packages/devtools/index.html)
+* [qqman Package](https://github.com/stephenturner/qqman)
